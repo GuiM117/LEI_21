@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "src",
+  "main": "app",
   "scripts": {
-    "test": "nodemon src dev",
-    "start": "nodemon src production"
+    "test": "nodemon app dev",
+    "start": "nodemon app production"
   },
   "author": "Tifany Silva",
   "license": "ISC",
@@ -13,5 +13,8 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.11.18"
+  },
+  "devDependencies": {
+    "mongodb": "^3.6.4"
   }
 }
