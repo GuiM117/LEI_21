@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app",
+  "main": "src",
   "scripts": {
-    "test": "nodemon app dev",
-    "start": "nodemon app production"
+    "test": "nodemon src dev",
+    "start": "nodemon src production"
   },
   "author": "Tifany Silva",
   "license": "ISC",
