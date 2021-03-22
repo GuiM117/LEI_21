@@ -26,4 +26,4 @@ const usersSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('MedsDB', usersSchema, 'users');
+module.exports = mongoose.model('users', usersSchema, 'users');
