@@ -17,4 +17,4 @@ const medsSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('MedsDB', medsSchema, 'meds');
+module.exports = mongoose.model('meds', medsSchema, 'meds');
