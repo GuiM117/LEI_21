@@ -24,4 +24,6 @@ router.post('/registMed', function(req,res) {
             .catch(e => res.send('error'))
     }
 })
+
+
 module.exports = router;
