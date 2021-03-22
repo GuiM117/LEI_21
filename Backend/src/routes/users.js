@@ -6,7 +6,7 @@ const User = require('../controllers/users');
 /* GET page Users */
 router.get('/listUsers', (req,res) => {
     User.listar()
-        .then(dados => res.send('users'))
+        .then(dados => res.json(dados))
         .catch(e => res.send('error'))
 })
 
@@ -22,7 +22,7 @@ router.post('/registUser', function(req,res) {
             birth_date: req.body.birth_date
         }
         User.inserir(UserV)
-            .then(dados => res.send('/users'))
+            .then(dados => res.json(UserV))
             .catch(e => res.send('error'))
     }
 })

@@ -1,4 +1,4 @@
-const Med = require ('../models/users');
+const User = require ('../models/users');
 
 //Devolve a lista de users
 module.exports.listar = () => {
