@@ -25,4 +25,6 @@ router.post('/registMed', function(req,res) {
             .catch(e => res.json('error'))
     }
 })
+
+
 module.exports = router;
