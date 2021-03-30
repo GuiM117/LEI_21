@@ -7,23 +7,23 @@ const usersSchema = new mongoose.Schema({
         auto: true
     },
     email: {
-        type: String
+        type: String,
+        match: [/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/, 'Please fill a valid email address'],
+        required: true
     },
     password: {
-        type: String
+        type: String,
+        required: true
     },
     name:{
         type: String
     },
-    sex:{
-        type: String
-    },
     role: {
-        type: String
+        type: String,
+        enum: [ "User", "Admin"],
+        default: "User",
+        required: true
     },
-    birth_date:{
-        type: String
-    }
 });
 
 module.exports = mongoose.model('users', usersSchema, 'users');
