@@ -22,7 +22,7 @@ router.post('/registMed', function(req,res) {
         }
         Med.inserir(MedV)
             .then(dados => res.json(MedV))
-            .catch(e => res.send('error'))
+            .catch(e => res.json('error'))
     }
 })
 module.exports = router;
