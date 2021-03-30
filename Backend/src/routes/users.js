@@ -19,7 +19,6 @@ router.post('/registUser', function(req,res) {
             password: req.body.password,
             name: req.body.name,
             role: req.body.role,
-            birth_date: req.body.birth_date
         }
         User.inserir(UserV)
             .then(dados => res.json(UserV))
