@@ -1,0 +1,55 @@
+.logoIMG{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 260px;
+    height: 75px;
+}
+
+.loginTitle {
+    position: absolute;
+    width: 111px;
+    height: 56px;
+    left: 40px;
+    top: 150px;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 37px;
+    line-height: 55px;
+    /* identical to box height */
+
+
+    color: #454545;
+}
+
+.subTitle {
+    position: absolute;
+    width: 513px;
+    height: 34px;
+    left: 40px;
+    top: 215px;
+
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 37px;
+
+    color: #676767;
+}
+
+.loginForm {
+    position: absolute;
+    left: 40px;
+    top: 300px;
+}
+
+form-group.label {
+    font-family: Poppins;
+}
+
+input {
+    border: none;
+}
