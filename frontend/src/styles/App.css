@@ -15,3 +15,17 @@ body {
     left: 264px;
     top: 170px;
 }
+
+.column {
+    float: left;
+    width: 50%;
+    column-fill: auto;
+}
+
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
