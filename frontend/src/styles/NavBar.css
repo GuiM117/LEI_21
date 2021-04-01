@@ -1,0 +1,9 @@
+.navBar {
+    position: absolute;
+    width: 1920px;
+    height: 92px;
+    left: 0px;
+    top: 0px;
+
+    background: #FFFFFF;
+}
