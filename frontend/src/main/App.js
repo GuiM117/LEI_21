@@ -2,6 +2,8 @@ import '../styles/App.css'
 import NavBar from '../components/NavBar'
 import Login from '../components/Login'
 import React from "react";
+import logo from "../assets/images/logo.png";
+import loginImg from "../assets/images/loginImg.png"
 
 const App = () => {
   return (
@@ -10,11 +12,8 @@ const App = () => {
             <NavBar/>
         </div>
         <div className="main">
-            <div className="row">
-                <div className="column">
-                    <Login/>
-                </div>
-            </div>
+            <Login/>
+            <img className="loginIMG" src={loginImg} alt={"loginImage"}></img>
         </div>
     </div>
   );
