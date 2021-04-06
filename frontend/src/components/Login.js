@@ -44,6 +44,9 @@ export default class Login extends Component {
                         <input type="password" name="password" value={this.state.password} onChange={event=> this.setPassword(event)} />
                     </div>
                 </div>
+                <button className="login2">
+                    Login
+                </button>
 
             </div>
 
