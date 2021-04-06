@@ -16,16 +16,18 @@ body {
     top: 170px;
 }
 
-.column {
-    float: left;
-    width: 50%;
-    column-fill: auto;
+.logoIMG{
+    position: absolute;
+    width: 696px;
+    height: 686px;
+    left: 960px;
+    top: 197px;
 }
 
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
+.loginIMG{
+    position: absolute;
+    width: 696px;
+    height: 690px;
+    left: 697px;
+    top: -3px;
 }
