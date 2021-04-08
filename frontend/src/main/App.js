@@ -1,8 +1,7 @@
 import '../styles/App.css'
 import NavBar from '../components/NavBar'
 import Login from '../components/Login'
-import React from "react";
-import logo from "../assets/images/logo.png";
+import React from "react"
 import loginImg from "../assets/images/loginImg.png"
 
 const App = () => {

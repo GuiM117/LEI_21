@@ -1,6 +1,9 @@
 import React, {Component} from "react"
+import {Route, Switch} from 'react-router'
+import HomePage from '../components/HomePage'
 import logo from '../assets/images/logo.png'
 import '../styles/Login.css'
+const axios = require('axios')
 
 const initialState = {
     email: '',
@@ -12,16 +15,28 @@ export default class Login extends Component {
     state = { ...initialState}
 
     setEmail(event){
-        this.setState({email: event.target.email})
+        this.setState({email: event.target.value})
 
     }
 
     setPassword(event){
-        this.setState({password: event.target.password})
+        this.setState({password: event.target.value})
     }
 
     login(){
-
+        axios.get(`http://localhost:5200/users/login?email=${this.state.email}&password=${this.state.password}`)
+            .then (dados => {
+                if (dados["data"]["response"] === true) {
+                    console.log("True")
+                    return (
+                        <Switch>
+                           <Route path="/homePage" render= {HomePage} />
+                        </Switch>
+                    )
+                }
+                else console.log(("False"))
+            })
+            .catch(error => console.log(error))
     }
 
     render() {
@@ -44,7 +59,7 @@ export default class Login extends Component {
                         <input type="password" name="password" value={this.state.password} onChange={event=> this.setPassword(event)} />
                     </div>
                 </div>
-                <button className="login2">
+                <button className="login2" onClick={event => this.login()}>
                     Login
                 </button>
 
