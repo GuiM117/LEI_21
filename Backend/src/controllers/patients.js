@@ -6,6 +6,7 @@ module.exports.listar = () => {
         .find()
         .exec()
 }
+
 //Consulta um Patient especifico por id
 module.exports.consultar = id => {
     return Patient
@@ -20,6 +21,5 @@ module.exports.inserir = p => {
 
 //Remove um Patient
 module.exports.remover = id => {
-    return Patient
-        .deleteOne({_id: id})
+    return Patient.deleteOne({_id: id})
 }

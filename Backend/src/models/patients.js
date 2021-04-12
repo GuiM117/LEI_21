@@ -8,7 +8,8 @@ const pacientSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        match: [/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/, 'Please fill a valid email address']
+        match: [/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/, 'Please fill a valid email address'],
+        unique: true
     },
     name:{
         type: String,
@@ -20,7 +21,7 @@ const pacientSchema = new mongoose.Schema({
         required: true
     },
     birth_date:{
-        type: String,
+        type: Date,
         required: true
     },
     episode_number:{

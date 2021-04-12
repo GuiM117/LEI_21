@@ -7,12 +7,13 @@ const Patient = require('../controllers/patients');
 router.get('/listPatients', (req,res) => {
     Patient.listar()
         .then(dados => res.json(dados))
-        .catch(e => res.send('error'))
+        .catch(e => res.json('error'))
 })
 
 /* POST a new Patient */
 router.post('/registPatient', function(req,res) {
     if(req.body.name != ""){
+
         let PatientV = {
             email: req.body.email,
             name: req.body.name,
@@ -22,7 +23,7 @@ router.post('/registPatient', function(req,res) {
         }
         Patient.inserir(PatientV)
             .then(dados => res.json(PatientV))
-            .catch(e => res.send('error'))
+            .catch(e => res.json(e))
     }
 })
 
