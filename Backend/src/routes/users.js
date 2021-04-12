@@ -12,7 +12,6 @@ router.get('/listUsers', (req,res) => {
 
 /* POST a new User */
 router.post('/registUser', function(req,res) {
-    console.log("AquiUser")
     if(req.body.name != ""){
         let UserV = {
             email: req.body.email,
@@ -22,9 +21,26 @@ router.post('/registUser', function(req,res) {
         }
         User.inserir(UserV)
             .then(dados => res.json(UserV))
-            .catch(e => res.send('error'))
+            .catch(e => res.json(error))
     }
 })
+
+/* LOGIN */
+router.get('/login', ((req, res) => {
+    const user = {
+        email: req.query.email,
+        password: req.query.password
+    }
+    User.findEmail(user.email)
+        .then(dados => {
+            if ( user.password == dados.password) res.json({response: true})
+            else res.json({response: false})
+        })
+        .catch(error => {
+            console.log("Erro")
+            res.status(404).json(error)
+        })
+}))
 
 
 module.exports = router;
