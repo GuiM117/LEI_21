@@ -23,3 +23,9 @@ module.exports.remover = id => {
     return Med
         .deleteOne({_id: id})
 }
+
+//Inserir muitos
+module.exports.inserirMts = meds => {
+    return Med
+        .insertMany(meds)
+}
