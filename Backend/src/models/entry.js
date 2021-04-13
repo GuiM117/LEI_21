@@ -1,17 +1,13 @@
 const { ObjectID } = require('mongodb');
 const mongoose = require('mongoose');
 
-const prescriptionSchema = new mongoose.Schema({
+const entrySchema = new mongoose.Schema({
     _id: {
         type: ObjectID,
         auto: true
     },
-    patient : {
+    med : {
         type: ObjectID,
-        required : true
-    },
-    meds : {
-        type: [ObjectID],
         required: true
     },
     initDate : {
@@ -21,7 +17,15 @@ const prescriptionSchema = new mongoose.Schema({
     endDate : {
         type: Date,
         required: true
+    },
+    description : {
+        type: String,
+        required: true
+    },
+    dosagePerDay : {
+        type: Number,
+        required: true
     }
 });
 
-module.exports = mongoose.model('prescription', prescriptionSchema, 'prescription');
+module.exports = mongoose.model('entry', entrySchema, 'entry');

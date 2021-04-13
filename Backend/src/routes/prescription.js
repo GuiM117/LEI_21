@@ -6,7 +6,7 @@ const Prescription = require('../controllers/prescription');
 
 
 /* GET page Prescription */
-router.get('/listPrescription', (req,res) => {
+router.get('/listPrescriptions', (req,res) => {
     Prescription.listar()
         .then(dados => res.json(dados))
         .catch(e => res.json(e))
@@ -17,11 +17,8 @@ router.post('/registPrescription', function(req,res) {
     if(req.body.name != ""){
         let Presc = {
             patient: req.body.patient,
-            med: req.body.med,
             initDate: req.body.initDate,
             endDate: req.body.endDate,
-            description: req.body.description,
-            dosagePerDay: req.body.dosagePerDay
         }
         Prescription.inserir(Presc)
             .then(dados => res.json(Presc))
@@ -29,5 +26,10 @@ router.post('/registPrescription', function(req,res) {
     }
 })
 
+router.post('/registEntry', function(req,res) {
+        Prescription.addMed(req.body.id, req.body.entryMed)
+            .then(dados => res.json(Presc))
+            .catch(e => res.json(e))
+})
 
 module.exports = router;

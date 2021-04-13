@@ -22,3 +22,8 @@ module.exports.inserir = p => {
 module.exports.remover = id => {
     return Prescription.deleteOne({_id: id})
 }
+
+// Insert new entry for medication
+module.exports.addMed = (id,med) => {
+    return Prescription.findByIdAndUpdate(id, {$addToSet: {meds: med}}, {new: true})
+}
