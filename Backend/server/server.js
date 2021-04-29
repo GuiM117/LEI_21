@@ -17,6 +17,7 @@ mongoose.connect(process.env.MONGO_CONNECTION, {
         throw new Error("Could not establish connection to MongoDB");
     });
 
+
 // using bodyParser urlencoded  and json extension for parsing frontend requests
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
