@@ -1,7 +1,7 @@
 const { ObjectID } = require('mongodb');
 const mongoose = require('mongoose');
 
-const pacientSchema = new mongoose.Schema({
+const patientSchema = new mongoose.Schema({
     _id: {
         type: ObjectID,
         auto: true
@@ -31,4 +31,4 @@ const pacientSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('patients', pacientSchema, 'patients');
+module.exports = mongoose.model('patient', patientSchema, 'patient');

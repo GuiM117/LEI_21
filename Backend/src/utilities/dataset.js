@@ -12,8 +12,8 @@ const reader =
     .pipe(csv())
     .on('data', async(row) => {
         //console.log(JSON.stringify(row));
-        var entries = Object.values(row);
-        var fields = entries[0].split(";");
+        let entries = Object.values(row);
+        let fields = entries[0].split(";");
         let Med = {
             name: fields[1],
             description: fields[3]
@@ -21,9 +21,9 @@ const reader =
         meds.push(Med)
     })
     .on('end', () => {
-        console.log('CSV file successfully processed');
+        //console.log('CSV file successfully processed');
         MedV.inserirMts(meds)
-            .then(dados => console.log("Data Migration Concluded"))
+            .then(() => console.log('CSV file successfully processed'))
             .catch(e => console.log(e))
     });
 

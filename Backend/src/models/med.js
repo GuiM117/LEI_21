@@ -13,8 +13,12 @@ const medsSchema = new mongoose.Schema({
         type: String
     },
     medType:{
-        type: String
+        type: [String]
+    },
+    quantity: {
+        type: [String]
     }
+
 });
 
-module.exports = mongoose.model('meds', medsSchema, 'meds');
+module.exports = mongoose.model('med', medsSchema, 'med');
