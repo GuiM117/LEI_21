@@ -1,4 +1,4 @@
-const Med = require ('../models/meds');
+const Med = require ('../models/activeSubs');
 
 //Devolve a lista de meds
 module.exports.listar = () => {
@@ -7,9 +7,9 @@ module.exports.listar = () => {
         .exec()
 }
 //Consulta um med especifico por id
-module.exports.consultar = id => {
+module.exports.consultar = chmd => {
     return Med
-        .findOne({_id: id})
+        .findOne({chmd: chmd})
         .exec()
 }
 //Insere um med
@@ -19,13 +19,18 @@ module.exports.inserir = m => {
 }
 
 //Remove um med
-module.exports.remover = id => {
+module.exports.remover = chmd => {
     return Med
-        .deleteOne({_id: id})
+        .deleteOne({chmd: chmd})
 }
 
 //Inserir muitos
 module.exports.inserirMts = meds => {
     return Med
         .insertMany(meds)
+}
+
+// Insert new entry for medication
+module.exports.addAdministrationFormID = (chnm,id) => {
+    return Med.findOneAndUpdate({chnm: chnm}, {$addToSet: {administrationForm_IDs: id}}, {new: true})
 }

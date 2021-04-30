@@ -6,7 +6,7 @@ const dataPathInteracoes = path.resolve(__dirname, "./medicamentos.csv");
 const csv = require('csv-parser');
 const fs = require('fs');
 
-const MedV = require('../controllers/meds');
+const MedV = require('../controllers/activeSubs');
 var meds = [];
 
 const readerCaracteizacao =
@@ -14,8 +14,8 @@ const readerCaracteizacao =
     .pipe(csv())
     .on('data', async(row) => {
         //console.log(JSON.stringify(row));
-        var entries = Object.values(row);
-        var fields = entries[0].split(";");
+        let entries = Object.values(row);
+        let fields = entries[0].split(";");
         let Med = {
             id: fields[1]
             name: fields[4],
@@ -28,9 +28,9 @@ const readerCaracteizacao =
         meds.push(Med)
     })
     .on('end', () => {
-        console.log('CSV file successfully processed');
+        //console.log('CSV file successfully processed');
         MedV.inserirMts(meds)
-            .then(dados => console.log("Data Migration Concluded"))
+            .then(() => console.log('CSV file successfully processed'))
             .catch(e => console.log(e))
     });
 
