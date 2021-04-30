@@ -7,7 +7,7 @@ const entrySchema = new mongoose.Schema({
         auto: true
     },
     med : {
-        type: ObjectID,
+        type: Number,
         required: true
     },
     initDate : {
