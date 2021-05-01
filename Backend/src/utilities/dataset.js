@@ -4,7 +4,7 @@ const dataPath = path.resolve(__dirname, "./medicamentos.csv");
 const csv = require('csv-parser');
 const fs = require('fs');
 
-const MedV = require('../controllers/activeSubs');
+const MedV = require('../controllers/dataset/activeSubs');
 var meds = [];
 
 const reader =
