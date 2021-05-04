@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="397998d4-9877-4638-9731-6a94eb5c212d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Backend/src/controllers/dataset/viaAdmin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/src/models/dataset/viaAdmin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/controllers/dataset/dci.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/controllers/dataset/dci.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/controllers/dataset/interactions.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/controllers/dataset/interactions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/controllers/dataset/pharmForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/controllers/dataset/pharmForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/controllers/dataset/unitMed.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/controllers/dataset/unitMed.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/models/dataset/interactions.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/models/dataset/interactions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/src/utilities/dataset.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/src/utilities/dataset.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1qWshHqDd7RoeLeiVG1X3E7keGQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Kenny\Desktop\Storage\UM\Mestrado\2 semestre\LEI\LEI_21\Backend\src\utilities" />
+      <recent name="C:\Users\Kenny\Desktop\Storage\UM\Mestrado\2 semestre\LEI\LEI_21\Backend\src" />
+      <recent name="C:\Users\Kenny\Desktop\Storage\UM\Mestrado\2 semestre\LEI\LEI_21\frontend\src\assets\images" />
+      <recent name="C:\Users\Kenny\Desktop\Storage\UM\Mestrado\2 semestre\LEI\LEI_21\frontend\src" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="397998d4-9877-4638-9731-6a94eb5c212d" name="Default Changelist" comment="" />
+      <created>1617206797639</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617206797639</updated>
+      <workItem from="1617206798842" duration="2120000" />
+      <workItem from="1617212377441" duration="604000" />
+      <workItem from="1617293621778" duration="6405000" />
+      <workItem from="1617314318412" duration="21000" />
+      <workItem from="1617314464032" duration="2793000" />
+      <workItem from="1617726152094" duration="2374000" />
+      <workItem from="1617886340734" duration="18000" />
+      <workItem from="1617886585246" duration="7259000" />
+      <workItem from="1618073527146" duration="623000" />
+      <workItem from="1618241990261" duration="8693000" />
+      <workItem from="1618250904505" duration="1885000" />
+      <workItem from="1619707154443" duration="4411000" />
+      <workItem from="1619799941207" duration="4080000" />
+      <workItem from="1620139450935" duration="9712000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.csv" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>

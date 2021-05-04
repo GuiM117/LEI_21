@@ -20,6 +20,12 @@ module.exports.inserir = p => {
     return dci.save()
 }
 
+//Insere várias Entries
+module.exports.inserirMts = dcis => {
+    return Dci
+        .insertMany(dcis)
+}
+
 //Remove um Entry
 module.exports.remover = id => {
     return Dci.deleteOne({_id: id})

@@ -23,7 +23,7 @@ const activeSubstancesSchema = new mongoose.Schema({
         type: Number
     },
     administrationForm_IDs : {
-        type : [Number]
+        type : Number
     }
 });
 
