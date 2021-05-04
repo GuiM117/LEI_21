@@ -26,6 +26,7 @@ router.post('/registMed', function(req,res) {
             name: req.body.name,
             dcd_ID: req.body.dcd_ID,
             farmForm_ID : req.body.farmForm_ID,
+            containerForm_ID: req.body.containerForm_ID,
             capacity: req.body.capacity,
             capacity_unit: req.body.capacity_unit,
             administrationForm_IDs: req.body.administrationForm_IDs

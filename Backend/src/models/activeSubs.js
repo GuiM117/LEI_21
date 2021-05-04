@@ -13,6 +13,9 @@ const activeSubs = new mongoose.Schema({
     farmForm_ID:{
         type: Number
     },
+    containerForm_ID:{
+        type: Number
+    },
     capacity: {
         type: Number
     },
@@ -20,7 +23,7 @@ const activeSubs = new mongoose.Schema({
         type: Number
     },
     administrationForm_IDs : {
-        type : [Number]
+        type : Number
     }
 
 });
