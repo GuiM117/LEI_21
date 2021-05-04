@@ -28,7 +28,7 @@ router.post('/registMed', function(req,res) {
             farmForm_ID : req.body.farmForm_ID,
             containerForm_ID: req.body.containerForm_ID,
             capacity: req.body.capacity,
-            capacity_unit: req.body.capacity_unit,
+            capacityUnit_ID: req.body.capacityUnit_ID,
             administrationForm_IDs: req.body.administrationForm_IDs
         }
         console.log(MedV.administrationForm_IDs)
