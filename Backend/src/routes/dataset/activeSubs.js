@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Med = require('../controllers/activeSubs');
+const Med = require('../../controllers/dataset/activeSubs');
 
 
 
@@ -31,6 +31,8 @@ router.post('/registMed', function(req,res) {
             capacity_unit: req.body.capacity_unit,
             administrationForm_IDs: req.body.administrationForm_IDs
         }
+        console.log(MedV.administrationForm_IDs)
+
 
         Med.inserir(MedV)
             .then(dados => res.json(MedV))

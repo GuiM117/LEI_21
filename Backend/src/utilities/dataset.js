@@ -6,7 +6,7 @@ const dataPathInteracoes = path.resolve(__dirname, "./Tab_mestre.csv");
 const csv = require('csv-parser');
 const fs = require('fs');
 
-const MedV = require('../controllers/activeSubs');
+const MedV = require('../controllers/dataset/activeSubs');
 var meds = [];
 
 const readerCaracteizacao =

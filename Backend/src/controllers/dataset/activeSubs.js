@@ -1,4 +1,4 @@
-const Med = require ('../models/activeSubs');
+const Med = require ('../../models/dataset/activeSubs');
 
 //Devolve a lista de meds
 module.exports.listar = () => {
@@ -6,12 +6,14 @@ module.exports.listar = () => {
         .find()
         .exec()
 }
+
 //Consulta um med especifico por id
 module.exports.consultar = chmd => {
     return Med
         .findOne({chmd: chmd})
         .exec()
 }
+
 //Insere um med
 module.exports.inserir = m => {
     let newMed = new Med(m)
