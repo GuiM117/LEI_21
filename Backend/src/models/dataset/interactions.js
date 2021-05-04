@@ -7,15 +7,6 @@ const interactionsSchema = new mongoose.Schema({
     chnm2 : {
         type: Number
     },
-    descriptionMed : {
-        type: String
-    },
-    descriptionPharm : {
-        type: String
-    },
-    descriptionEnf : {
-        type: String
-    },
     descriptionFull : {
         type: String
     },

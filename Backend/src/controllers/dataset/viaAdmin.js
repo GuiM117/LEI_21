@@ -1,32 +1,32 @@
-const UnitMed = require ('../../models/dataset/unitMed');
+const ViaAdmin = require ('../../models/dataset/viaAdmin');
 
 //Devolve a lista de unidades medicas
 module.exports.listar = () => {
-    return UnitMed
+    return ViaAdmin
         .find()
         .exec()
 }
 
 //Consulta um Entry especifico por id
 module.exports.consultar = id => {
-    return UnitMed
+    return ViaAdmin
         .findOne({_id: id})
         .exec()
 }
 
 //Insere um unitMed
 module.exports.inserir = p => {
-    let dci = new UnitMed(p)
-    return dci.save()
+    let via = new ViaAdmin(p)
+    return via.save()
+}
+//Insere várias Entries
+module.exports.inserirMts = vAdmin => {
+    return ViaAdmin
+        .insertMany(vAdmin)
 }
 
-//Insere várias Entries
-module.exports.inserirMts = uMeds => {
-    return UnitMed
-        .insertMany(uMeds)
-}
 
 //Remove um unitMed
 module.exports.remover = id => {
-    return UnitMed.deleteOne({_id: id})
+    return ViaAdmin.deleteOne({_id: id})
 }
