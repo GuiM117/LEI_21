@@ -6,20 +6,12 @@ const prescriptionSchema = new mongoose.Schema({
         type: ObjectID,
         auto: true
     },
-    patient : {
-        type: ObjectID,
+    patientNumber : {
+        type: Number,
         required : true
     },
-    meds : {
+    entryID : {
         type: [ObjectID],
-        required: true
-    },
-    initDate : {
-        type: Date,
-        required: true
-    },
-    endDate : {
-        type: Date,
         required: true
     }
 });

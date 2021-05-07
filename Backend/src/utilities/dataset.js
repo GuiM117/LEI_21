@@ -26,6 +26,13 @@ const readerCaracteizacao =
         //console.log(JSON.stringify(row));
         let entries = Object.values(row);
         let fields = entries[0].split(";");
+        let adminForm_IDS = []
+
+        for (let i = 11; i<21; i++ ) {
+            if (fields[i]) adminForm_IDS.push(fields[i])
+        }
+
+
         let Med = {
             chnm: fields[0],
             name: fields[3],
@@ -34,7 +41,7 @@ const readerCaracteizacao =
             containerForm_ID: fields[5],
             capacity: fields[9],
             capacity_unit: fields[10],
-            administrationForm_IDs: 0
+            administrationForm_IDs: adminForm_IDS
         }
         meds.push(Med)
     })

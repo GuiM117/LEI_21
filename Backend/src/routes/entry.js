@@ -16,11 +16,12 @@ router.get('/listEntry', (req,res) => {
 router.post('/registEntry', function(req,res) {
     if(req.body.name != ""){
         let Presc = {
-            med: req.body.med,
+            chnm: req.body.chnm,
             initDate: req.body.initDate,
             endDate: req.body.endDate,
             description: req.body.description,
-            dosagePerDay: req.body.dosagePerDay
+            dosagePerDay: req.body.dosagePerDay,
+            dosageUnitID: req.body.dosageUnitID
         }
         Entry.inserir(Presc)
             .then(dados => res.json(Presc))

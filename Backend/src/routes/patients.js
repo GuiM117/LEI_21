@@ -15,7 +15,7 @@ router.post('/registPatient', function(req,res) {
     if(req.body.name != ""){
 
         let PatientV = {
-            email: req.body.email,
+            patientNumber: req.body.patientNumber,
             name: req.body.name,
             sex: req.body.sex,
             birth_date: req.body.birth_date,
