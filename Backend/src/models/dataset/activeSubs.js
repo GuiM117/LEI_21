@@ -7,7 +7,7 @@ const activeSubstancesSchema = new mongoose.Schema({
     name: {
         type: String
     },
-    dcd_ID: {
+    dci_ID: {
         type: Number
     },
     farmForm_ID:{
@@ -23,7 +23,7 @@ const activeSubstancesSchema = new mongoose.Schema({
         type: Number
     },
     administrationForm_IDs : {
-        type : Number
+        type : [Number]
     }
 });
 

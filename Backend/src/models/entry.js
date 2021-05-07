@@ -25,6 +25,10 @@ const entrySchema = new mongoose.Schema({
     dosagePerDay : {
         type: Number,
         required: true
+    },
+    dosageUnit: {
+        type: Number,
+        required: true
     }
 });
 
