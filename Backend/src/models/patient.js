@@ -1,14 +1,9 @@
-const { ObjectID } = require('mongodb');
 const mongoose = require('mongoose');
 
 const patientSchema = new mongoose.Schema({
-    _id: {
-        type: ObjectID,
-        auto: true
-    },
-    email: {
-        type: String,
-        match: [/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/, 'Please fill a valid email address'],
+    patientNumber: {
+        type: Number,
+        required: true,
         unique: true
     },
     name:{
@@ -28,7 +23,6 @@ const patientSchema = new mongoose.Schema({
         type: Number,
         required: true
     }
-
 });
 
 module.exports = mongoose.model('patient', patientSchema, 'patient');

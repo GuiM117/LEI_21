@@ -6,7 +6,7 @@ const entrySchema = new mongoose.Schema({
         type: ObjectID,
         auto: true
     },
-    med : {
+    chnm : {
         type: Number,
         required: true
     },
@@ -23,6 +23,10 @@ const entrySchema = new mongoose.Schema({
         required: true
     },
     dosagePerDay : {
+        type: Number,
+        required: true
+    },
+    dosageUnitID: {
         type: Number,
         required: true
     }

@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const activeSubs = new mongoose.Schema({
+const activeSubstancesSchema = new mongoose.Schema({
     chnm: {
         type: Number
     },
     name: {
         type: String
     },
-    dcd_ID: {
+    dci_ID: {
         type: Number
     },
     farmForm_ID:{
@@ -19,13 +19,12 @@ const activeSubs = new mongoose.Schema({
     capacity: {
         type: Number
     },
-    capacity_unit : {
+    capacityUnit_ID : {
         type: Number
     },
     administrationForm_IDs : {
         type : Number
     }
-
 });
 
-module.exports = mongoose.model('activeSubs', activeSubs, 'activeSubs');
+module.exports = mongoose.model('activeSubstances', activeSubstancesSchema, 'activeSubstances');
