@@ -1,6 +1,8 @@
 import React, {Component} from "react"
 import {Route, Switch} from 'react-router'
+import {Redirect} from 'react-router-dom'
 import HomePage from '../components/HomePage'
+import MedicPage from '../main/MedicPage/MedicPage';
 import logo from '../assets/images/logo.png'
 import '../styles/Login.css'
 const axios = require('axios')
@@ -24,14 +26,13 @@ export default class Login extends Component {
     }
 
     login(){
-        axios.get(`http://localhost:5200/users/login?email=${this.state.email}&password=${this.state.password}`)
+        console.log("AQUI antes do axios.get")
+        axios.get(`http://localhost:4800/users/login?email=${this.state.email}&password=${this.state.password}`)
             .then (dados => {
                 if (dados["data"]["response"] === true) {
-                    console.log("True")
+                    console.log("True---- AQUI")
                     return (
-                        <Switch>
-                           <Route path="/homePage" render= {HomePage} />
-                        </Switch>
+                        <Redirect to='/medic'  />
                     )
                 }
                 else console.log(("False"))
