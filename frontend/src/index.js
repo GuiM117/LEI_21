@@ -6,8 +6,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 const rootElement = document.getElementById('root');
-console.log(document.getElementsByTagName('base'));
-//const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
+
 
 ReactDOM.render(
     <BrowserRouter >

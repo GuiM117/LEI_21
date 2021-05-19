@@ -6,21 +6,25 @@ import Button from '@material-ui/core/Button';
 import EntryInput from '../../components/EntryInput.js';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
+//let patients = []
+const axios = require('axios')
 
 // Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const top100Films = [
-  { title: 'The Shawshank Redemption', year: 1994 },
-  { title: 'The Godfather', year: 1972 },
-  { title: 'The Godfather: Part II', year: 1974 },
-  { title: 'The Dark Knight', year: 2008 },
-  { title: '12 Angry Men', year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: 'Pulp Fiction', year: 1994 },
-];
+
+let top100Films = [];
+
 
 export default class PainelNovaPrescricao extends React.Component {
-  
-  
+
+  constructor() {
+    super();
+
+    this.fetchPatients()
+
+    console.log(top100Films)
+
+  }
+
   state = {
     entrys: [{entryId:"", qtdMed:""}]
   }
@@ -31,18 +35,30 @@ export default class PainelNovaPrescricao extends React.Component {
     }));
   }
 
+  async fetchPatients ( ){
+    try {
+      const result = await axios.get("http://localhost:4800/patients/listPatients")
+      top100Films = result.data
+
+    } catch (e) {
+      console.log(e)
+    }
+
+  }
+
+  componentDidMount() {
+    this.fetchPatients()
+  }
+
 
   render(){
     let {entrys} = this.state
     return (
       <React.Fragment>
-
         <Typography variant="h6" gutterBottom>
           Medicação
         </Typography>
-
         <Grid container spacing={3}>
-
           <Grid item xs={12} sm={2}>
             <TextField
               id="numUtente"
@@ -55,8 +71,8 @@ export default class PainelNovaPrescricao extends React.Component {
           <Grid item xs={12} sm={6}>
             <Autocomplete
               id="lastName"
-              options={top100Films}
-              getOptionLabel={(option) => option.title}
+              options = {top100Films}
+              getOptionLabel={(option) => option.name }
               style={{ width: 455 }}
               renderInput={(params) => <TextField {...params} label="Nome Paciente" variant="outlined" />}
             />
