@@ -1,10 +1,10 @@
 import React, {Component} from "react"
-import {Route, Switch} from 'react-router'
-import {Redirect} from 'react-router-dom'
-import HomePage from '../components/HomePage'
-import MedicPage from '../main/MedicPage/MedicPage';
 import logo from '../assets/images/logo.png'
 import '../styles/Login.css'
+import {withRouter} from "react-router";
+
+
+
 const axios = require('axios')
 
 const initialState = {
@@ -12,7 +12,9 @@ const initialState = {
     password:''
 }
 
-export default class Login extends Component {
+
+
+class Login extends Component {
 
     state = { ...initialState}
 
@@ -30,15 +32,14 @@ export default class Login extends Component {
         axios.get(`http://localhost:4800/users/login?email=${this.state.email}&password=${this.state.password}`)
             .then (dados => {
                 if (dados["data"]["response"] === true) {
-                    console.log("True---- AQUI")
-                    return (
-                        <Redirect to='/medic'  />
-                    )
+                    console.log("True")
+                    this.props.history.push('/medic')
                 }
                 else console.log(("False"))
             })
             .catch(error => console.log(error))
     }
+
 
     render() {
         return (
@@ -60,7 +61,7 @@ export default class Login extends Component {
                         <input type="password" name="password" value={this.state.password} onChange={event=> this.setPassword(event)} />
                     </div>
                 </div>
-                <button className="login2" onClick={event => this.login()}>
+                <button className="login2" onClick={event => this.login2()}>
                     Login
                 </button>
 
@@ -69,3 +70,5 @@ export default class Login extends Component {
         )
     }
 }
+
+export default withRouter(Login)

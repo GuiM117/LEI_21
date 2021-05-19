@@ -1,16 +1,14 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import App from './main/App';
+import { Route, Switch } from "react-router-dom";
+import LandPage from './main/LandPage';
 import MedicPage from './main/MedicPage/MedicPage';
 
 
 const Routes = () => (
-    <BrowserRouter>
         <Switch>
-            <Route exact path='/' component={App} />
             <Route path='/medic' component={MedicPage} />
+            <Route exact path='/' component={LandPage} />
         </Switch>
-    </BrowserRouter>
 );
 
 export default Routes;
