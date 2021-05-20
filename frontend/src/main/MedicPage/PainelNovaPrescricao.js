@@ -5,51 +5,53 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import EntryInput from '../../components/EntryInput.js';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-
-//let patients = []
 const axios = require('axios')
 
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
 
-let top100Films = [];
-
+const initialState = {
+  entrys: [{entryId:"", qtdMed:""}],
+  patientsList: [],
+  patient:{}
+}
 
 export default class PainelNovaPrescricao extends React.Component {
 
-  constructor() {
-    super();
 
-    this.fetchPatients()
-
-    console.log(top100Films)
-
-  }
-
-  state = {
-    entrys: [{entryId:"", qtdMed:""}]
-  }
+  state = { ...initialState  }
 
   addEntry = (e) => {
     this.setState((prevState) => ({
       entrys: [...prevState.entrys, {entryId:"", qtdMed:""}],
     }));
+    console.log("novo medicamento")
   }
 
-  async fetchPatients ( ){
-    try {
-      const result = await axios.get("http://localhost:4800/patients/listPatients")
-      top100Films = result.data
+  componentWillMount() {
+    axios("http://localhost:4800/patients/listPatients").then(resp => {
+      this.setState({patientsList: resp.data}, () => {
+        console.log(this.state)
+      })
+    })
+  }
 
-    } catch (e) {
-      console.log(e)
+  handleSelectedName(value) {
+    let auxPatient = {
+      name:value.name,
+      patientNumber: value.patientNumber,
+      sex:value.sex,
+      birth_date:value.birth_date,
+      episode_number:value.episode_number
     }
-
+    this.setState({patient: { ...auxPatient}}, () => {
+      console.log("Estado",this.state)
+    })
   }
 
-  componentDidMount() {
-    this.fetchPatients()
+  handleSelectedPatientNumber(value) {
+    this.setState({ patient : {patientNumber: value } }, () => {
+      console.log(this.state.patient)
+    })
   }
-
 
   render(){
     let {entrys} = this.state
@@ -61,20 +63,23 @@ export default class PainelNovaPrescricao extends React.Component {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={2}>
             <TextField
-              id="numUtente"
-              name="numUtente"
-              label="NºUtente"
-              type="number"
+                id="outlined-basic"
+                label="Nº de Utente"
+                variant="outlined"
+                value={this.state.patient.patientNumber}
+                onChange={(event, value) => this.handleSelectedPatientNumber(value)}
+
             />
           </Grid>
 
           <Grid item xs={12} sm={6}>
             <Autocomplete
               id="lastName"
-              options = {top100Films}
-              getOptionLabel={(option) => option.name }
+              options = {this.state.patientsList}
+              getOptionLabel={(option) => option.name}
               style={{ width: 455 }}
               renderInput={(params) => <TextField {...params} label="Nome Paciente" variant="outlined" />}
+              onChange={ (event,value) => this.handleSelectedName(value)}
             />
           </Grid>
           
