@@ -9,7 +9,6 @@ import { VariableSizeList } from 'react-window';
 import { Typography } from '@material-ui/core';
 
 
-
 const LISTBOX_PADDING = 8; // px
 
 function renderRow(props) {
@@ -38,7 +37,6 @@ function useResetCache(data) {
     }, [data]);
     return ref;
 }
-
 
 // Adapter for react-window
 const ListboxComponent = React.forwardRef(function ListboxComponent(props, ref) {
@@ -91,7 +89,6 @@ ListboxComponent.propTypes = {
     children: PropTypes.node,
 };
 
-
 const useStyles = makeStyles({
     listbox: {
         boxSizing: 'border-box',
@@ -101,7 +98,6 @@ const useStyles = makeStyles({
         },
     },
 });
-
 
 const renderGroup = (params) => [
     <ListSubheader key={params.key} component="div">
@@ -118,15 +114,14 @@ export default function Virtualize(props) {
     return (
         <Autocomplete
             id="virtualize-demo"
-            style={{ width: 300 }}
             disableListWrap
             classes={classes}
             ListboxComponent={ListboxComponent}
             renderGroup={renderGroup}
-            options={props.drugList.sort((a, b) => a.name > b.name && 1 || -1)}
+            options={props.drugList.sort((a, b) => (a.name > b.name) ? 1 : -1)}
             getOptionLabel={option => option.name}
             groupBy={(option) => option.name[0].toUpperCase()}
-            renderInput={(params) => <TextField {...params} variant="outlined" label="10,000 options" />}
+            renderInput={(params) => <TextField {...params} variant="outlined" label="Substâncias Ativas" />}
             renderOption={(option) => <Typography noWrap>{option.name}</Typography>}
         />
     );

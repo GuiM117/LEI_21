@@ -1,7 +1,6 @@
 import React from "react";
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-//import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField'
 import axios from "axios";
 import VirtualizeList from "./VirtualizeList";
 
@@ -14,10 +13,11 @@ const initialState = {
 export default class EntryInput extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {...initialState}
+
     }
 
 
-    state = {...initialState}
 
   componentWillMount() {
     axios("http://localhost:4800/meds/listMeds").then(resp => {
@@ -34,11 +34,11 @@ export default class EntryInput extends React.Component {
             return(
               <React.Fragment>
                 <Grid container justify="space-between" spacing={3}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={12}>
                         <VirtualizeList drugList = {this.state.drugsList}/>
                     </Grid>
 
-                    <Grid item xs={12} sm={3}>
+                    {/*<Grid item xs={12} sm={3}>
                       <TextField
                           id="standard-number"
                           label="Por Dia"
@@ -47,9 +47,9 @@ export default class EntryInput extends React.Component {
                             shrink: true,
                           }}
                       />
-            </Grid>
+                    </Grid>*/}
 
-                    <Grid item xs={12} sm={3}>
+                    {/*<Grid item xs={12} sm={3}>
                       <TextField
                           type="text"
                           name="uniMed"
@@ -58,8 +58,17 @@ export default class EntryInput extends React.Component {
                           fullWidth
                           className="uniMed"
                       />
-                    </Grid>
+                    </Grid>*/}
 
+                    <Grid item xs={12} sm={12}>
+                        <TextField
+                            label="Informação Detalhada"
+                            variant="outlined"
+                            disabled={true}
+                            fullWidth
+                            multiline={true}
+                        />
+                    </Grid>
                     <Grid item xs={12} sm={6}>
                       <TextField
                           id="DataInicio"
@@ -87,12 +96,13 @@ export default class EntryInput extends React.Component {
                     </Grid>
 
                     <Grid item xs={12} sm={12}>
-                      <TextField
-                          id="notasText"
-                          label="Notas"
-                          variant="outlined"
-                          fullWidth
-                      />
+                        <TextField
+                            label="Posologia"
+                            variant="outlined"
+                            fullWidth
+                            multiline={true}
+                        />
+
                     </Grid>
                 </Grid>
               </React.Fragment>
