@@ -1,48 +1,42 @@
-import React, {Component} from "react"
 import logo from '../assets/images/logo.png'
 import '../styles/Login.css'
+import React, { useState } from 'react';
+import LoginAlerts from './Alerts'
 import {withRouter} from "react-router";
-
 
 
 const axios = require('axios')
 
-const initialState = {
-    email: '',
-    password:''
-}
+function Login (props){
+
+    const [iState, setState] = useState({
+        email: '',
+        password:''
+    })
 
 
 
-class Login extends Component {
-
-    state = { ...initialState}
-
-    setEmail(event){
-        this.setState({email: event.target.value})
-
-    }
-
-    setPassword(event){
-        this.setState({password: event.target.value})
-    }
-
-    login(){
+    function login(){
         console.log("AQUI antes do axios.get")
-        axios.get(`http://localhost:4800/users/login?email=${this.state.email}&password=${this.state.password}`)
+        axios.get(`http://localhost:4800/users/login?email=${iState.email}&password=${iState.password}`)
             .then (dados => {
                 if (dados["data"]["response"] === true) {
                     console.log("True")
-                    this.props.history.push('/medic')
+                    console.log(iState.password)
+                    props.history.push('/medic')
                 }
-                else console.log(("False"))
+                else {
+                    console.log("FAIL")
+                    return (
+                        <LoginAlerts open={true}/>
+                    )
+                }
             })
             .catch(error => console.log(error))
     }
 
 
-    render() {
-        return (
+    return (
             <div>
                 <img className="logoIMG" src={logo} alt={"logo"}></img>
                 <div className="loginTitle">
@@ -54,21 +48,20 @@ class Login extends Component {
                 <div className="loginForm">
                     <div className="form-group">
                         <label htmlFor="email">Email: </label>
-                        <input type="email" name="email" value={this.state.email} onChange={event => this.setEmail(event)}/>
+                        <input type="email" name="email" value={iState.email} onChange={event => setState({...iState, email: event.target.value})}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password: </label>
-                        <input type="password" name="password" value={this.state.password} onChange={event=> this.setPassword(event)} />
+                        <input type="password" name="password" value={iState.password} onChange={event=> setState({...iState, password: event.target.value})} />
                     </div>
                 </div>
-                <button className="login2" onClick={event => this.login2()}>
+                <button className="login2" onClick={event => login()}>
                     Login
                 </button>
 
             </div>
 
         )
-    }
 }
 
 export default withRouter(Login)

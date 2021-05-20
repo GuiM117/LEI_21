@@ -35,7 +35,7 @@ const readerCaracteizacao =
 
         let Med = {
             chnm: fields[0],
-            name: fields[3],
+            name: fields[2],
             dci_ID: fields[4],
             farmForm_ID: fields[6],
             containerForm_ID: fields[5],
