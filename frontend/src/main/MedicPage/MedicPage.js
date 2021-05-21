@@ -158,8 +158,7 @@ function getStepContent(step) {
 }
 
 const MedicPage = () => {
-  
-  
+
   const classes = useStyles();
   const classes2 = useStyles2();
 
@@ -172,8 +171,9 @@ const MedicPage = () => {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
   return (
-    
+
     <div className={classes.root}>
       <MenuAdmin/>
       <main className={classes.content}>
@@ -182,7 +182,6 @@ const MedicPage = () => {
 
         <React.Fragment>
           <CssBaseline />
-          
           <main className={classes2.layout}>
             <Paper className={classes2.paper}>
               <Typography component="h1" variant="h4" align="center">

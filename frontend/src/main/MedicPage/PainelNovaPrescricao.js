@@ -68,7 +68,6 @@ export default class PainelNovaPrescricao extends React.Component {
                 variant="outlined"
                 value={this.state.patient.patientNumber}
                 onChange={(event, value) => this.handleSelectedPatientNumber(value)}
-
             />
           </Grid>
 
