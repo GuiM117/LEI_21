@@ -9,21 +9,20 @@ const axios = require('axios')
 
 
 const initialState = {
-  entrys: [{entryId:"", qtdMed:""}],
+  entries: [{entryId:"", qtdMed:""}],
   patientsList: [],
   patient:{}
 }
 
 export default class PainelNovaPrescricao extends React.Component {
 
-
   state = { ...initialState  }
 
   addEntry = (e) => {
     this.setState((prevState) => ({
-      entrys: [...prevState.entrys, {entryId:"", qtdMed:""}],
+      entries: [...prevState.entries, {entryId:"", qtdMed:""}],
     }));
-    console.log("novo medicamento")
+
   }
 
   componentWillMount() {
@@ -53,44 +52,52 @@ export default class PainelNovaPrescricao extends React.Component {
     })
   }
 
+  handleEntry(value){
+    this.setState(this.state.entries.push(value))
+  }
+
   render(){
-    let {entrys} = this.state
+    let {entries} = this.state
     return (
       <React.Fragment>
         <Typography variant="h6" gutterBottom>
           Medicação
         </Typography>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={2}>
+          <Grid item  xs={12} sm={4}>
             <TextField
                 id="outlined-basic"
                 label="Nº de Utente"
                 variant="outlined"
+                style={{width: 370}}
                 value={this.state.patient.patientNumber}
                 onChange={(event, value) => this.handleSelectedPatientNumber(value)}
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
+          <Grid item  xs={12} sm={8}>
             <Autocomplete
               id="lastName"
               options = {this.state.patientsList}
               getOptionLabel={(option) => option.name}
-              style={{ width: 455 }}
+              style={{ width: 758 }}
               renderInput={(params) => <TextField {...params} label="Nome Paciente" variant="outlined" />}
               onChange={ (event,value) => this.handleSelectedName(value)}
             />
           </Grid>
           
-          <EntryInput entrys={entrys}/>
+          <EntryInput entries={entries} />
 
-          <Button
-                variant="contained"
-                color="secondary"
-                onClick={this.addEntry}
-                className="botao2"
-              >Novo Medicamento
-          </Button>
+          <Grid item xs={12} sm={4}>
+            <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={this.addEntry}
+                  className="botao2"
+                >Novo Medicamento
+            </Button>
+
+          </Grid>
         </Grid>
       </React.Fragment>
   );

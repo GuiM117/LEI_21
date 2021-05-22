@@ -39,7 +39,7 @@ const readerCaracteizacao =
             farmForm_ID: entries[6],
             containerForm_ID: entries[5],
             capacity: entries[9],
-            capacity_unit: entries[10],
+            capacityUnit_ID: entries[10],
             administrationForm_IDs: adminForm_IDS
         }
         meds.push(Med)

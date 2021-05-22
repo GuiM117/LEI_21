@@ -108,7 +108,14 @@ const renderGroup = (params) => [
 
 export default function Virtualize(props) {
     const classes = useStyles();
-    //const [drugList, setDrugList] = useState([])
+
+
+    function handleChange(value) {
+        //console.log(value.dci_ID, value.administrationForm_IDs, (value.capacity == null) ? "é null":"não é", value.containerForm_ID, value.farmForm_ID)
+        console.log("Entry", value)
+        let medEntry = value
+        props.sendData(medEntry);
+    }
 
 
     return (
@@ -121,8 +128,9 @@ export default function Virtualize(props) {
             options={props.drugList.sort((a, b) => (a.name > b.name) ? 1 : -1)}
             getOptionLabel={option => option.name}
             groupBy={(option) => option.name[0].toUpperCase()}
-            renderInput={(params) => <TextField {...params} variant="outlined" label="Substâncias Ativas" />}
+            renderInput={(params) => <TextField {...params} variant="outlined" />}
             renderOption={(option) => <Typography noWrap>{option.name}</Typography>}
+            onChange={(event, value) => handleChange(value)}
         />
     );
 }

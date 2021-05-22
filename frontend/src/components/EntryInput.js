@@ -5,7 +5,9 @@ import axios from "axios";
 import VirtualizeList from "./VirtualizeList";
 
 const initialState = {
-  drugsList: []
+  drugsList: [],
+  currentMedEntry:{},
+  currentDescription:""
 }
 
 
@@ -17,9 +19,7 @@ export default class EntryInput extends React.Component {
 
     }
 
-
-
-  componentWillMount() {
+    componentWillMount() {
     axios("http://localhost:4800/meds/listMeds").then(resp => {
       this.setState({drugsList: resp.data}, () => {
         console.log(this.state)
@@ -27,39 +27,100 @@ export default class EntryInput extends React.Component {
     })
   }
 
+    handlePosology = (value) => {
+        this.setState({currentDescription:""})
+        if (value) {
+            this.renderDCI(value.dci_ID)
+            this.renderPharmForm(value.farmForm_ID)
+            this.renderContainerForm(value.containerForm_ID)
+            this.renderViasAdministraçao(value.administrationForm_IDs)
+            this.renderCapacity(value.capacityUnit_ID, value.capacity)
+        }
+    }
+
+    renderCapacity(id,capacity){
+        if (id){
+            axios.get(`http://localhost:4800/unitMed/getUnitMed?id=${id}`)
+                .then(data => {
+                    let description = ""
+                    if (this.state.currentDescription !== "") description += "\n"
+                    description += `\nCapacidade: ${capacity} ${data.data}`
+                    this.setState({currentDescription: this.state.currentDescription.concat(description)})
+                })
+                .catch (e => console.log(e))
+        }
+    }
+
+    renderDCI (id) {
+        if (id){
+            axios.get(`http://localhost:4800/dci/getDCI?id=${id}`)
+                .then(data => {
+                    let description = ""
+                    if (this.state.currentDescription !== "") description += "\n"
+                    description += `Designação Comum Internacional: ${data.data}`
+                    this.setState({currentDescription: this.state.currentDescription.concat(description)})
+                })
+                .catch (e => console.log(e))
+        }
+    }
+
+    renderPharmForm (id) {
+        if (id){
+            axios.get(`http://localhost:4800/pharmForm/getPharmForm?id=${id}`)
+                .then(data => {
+                    let description = ""
+                    if (this.state.currentDescription !== "") description += "\n"
+                    description += `\nForma Farmacêutica: ${data.data}`
+                    this.setState({currentDescription: this.state.currentDescription.concat(description)})
+                })
+                .catch (e => console.log(e))
+        }
+    }
+
+    renderContainerForm(id){
+        if (id){
+            axios.get(`http://localhost:4800/unitMed/getUnitMed?id=${id}`)
+                .then(data => {
+                    let description = ""
+                    if (this.state.currentDescription !== "") description += "\n"
+                    description += `\nForma de Apresentação: ${data.data}`
+                    this.setState({currentDescription: this.state.currentDescription.concat(description)})
+                })
+                .catch (e => console.log(e))
+        }
+    }
+
+    renderViasAdministraçao(ids){
+        if (ids){
+            axios.get(`http://localhost:4800/viaAdmin/getViaAdmins?ids=${ids}`)
+                .then(data => {
+                    let viasArray = data.data
+                    let description = ""
+                    if (this.state.currentDescription !== "") description += "\n"
+                    description += "\nVia(s) de Administração: "
+
+                    for(let i = 0; i< viasArray.length ;i++){
+                        if (i === viasArray.length - 1) description += `${viasArray[i].description}`
+
+                        else description += `${viasArray[i].description}, `
+                    }
+                    this.setState({currentDescription: this.state.currentDescription.concat(description)})
+                })
+                .catch (e => console.log(e))
+        }
+    }
+
+
 
   render() {
     return (
-        this.props.entrys.map((val, idx)=> {
+        this.props.entries.map((val, idx)=> {
+            console.log(val, idx)
             return(
               <React.Fragment>
-                <Grid container justify="space-between" spacing={3}>
                     <Grid item xs={12} sm={12}>
-                        <VirtualizeList drugList = {this.state.drugsList}/>
+                        <VirtualizeList drugList = {this.state.drugsList} sendData={this.handlePosology}/>
                     </Grid>
-
-                    {/*<Grid item xs={12} sm={3}>
-                      <TextField
-                          id="standard-number"
-                          label="Por Dia"
-                          type="number"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                      />
-                    </Grid>*/}
-
-                    {/*<Grid item xs={12} sm={3}>
-                      <TextField
-                          type="text"
-                          name="uniMed"
-                          id="uniMed"
-                          label="Uni"
-                          fullWidth
-                          className="uniMed"
-                      />
-                    </Grid>*/}
-
                     <Grid item xs={12} sm={12}>
                         <TextField
                             label="Informação Detalhada"
@@ -67,6 +128,7 @@ export default class EntryInput extends React.Component {
                             disabled={true}
                             fullWidth
                             multiline={true}
+                            value = {this.state.currentDescription}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -81,7 +143,6 @@ export default class EntryInput extends React.Component {
                           }}
                       />
                     </Grid>
-
                     <Grid item xs={12} sm={6}>
                       <TextField
                           id="DataFim"
@@ -94,7 +155,6 @@ export default class EntryInput extends React.Component {
                           }}
                       />
                     </Grid>
-
                     <Grid item xs={12} sm={12}>
                         <TextField
                             label="Posologia"
@@ -104,7 +164,6 @@ export default class EntryInput extends React.Component {
                         />
 
                     </Grid>
-                </Grid>
               </React.Fragment>
             )
         })

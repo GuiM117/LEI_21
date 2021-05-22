@@ -25,4 +25,11 @@ router.post('/registPharmForm', function(req,res) {
         .catch(e => res.json(e))
 })
 
+router.get('/getPharmForm', (req,res) => {
+    let idPharmForm = req.query.id
+
+    PharmForm.consultar(idPharmForm)
+        .then (dados => res.json(dados.description))
+})
+
 module.exports = router;
