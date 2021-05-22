@@ -25,4 +25,13 @@ router.post('/registDci', function(req,res) {
         .catch(e => res.json(e))
 })
 
+router.get('/getDCI', (req,res) => {
+    let dciID = req.query.id
+
+    Dci.consultar(dciID)
+        .then(dados => res.json(dados.description))
+        .catch(e => res.json(e))
+
+})
+
 module.exports = router;

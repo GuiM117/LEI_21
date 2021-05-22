@@ -25,4 +25,12 @@ router.post('/registAdmin', function(req,res) {
         .catch(e => res.json(e))
 })
 
+router.get('/getViaAdmins', (req,res) => {
+    let arrayIds = req.query.ids
+
+    Admin.consultarMts(arrayIds)
+         .then(dados => res.json(dados))
+         .catch( e => res.json(e))
+})
+
 module.exports = router;

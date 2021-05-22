@@ -18,6 +18,8 @@ router.post('/registAdministrationFormID', function(req,res) {
         .catch(e => res.json(e))
 })
 
+
+
 /* POST a new Med */
 router.post('/registMed', function(req,res) {
     if(req.body.name != ""){

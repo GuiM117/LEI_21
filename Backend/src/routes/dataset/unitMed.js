@@ -25,4 +25,12 @@ router.post('/registUnitMed', function(req,res) {
         .catch(e => res.json(e))
 })
 
+router.get('/getUnitMed', (req,res) => {
+    let idUnitMedic = req.query.id
+
+    UnitMed.consultar(idUnitMedic)
+           .then(dados => res.json(dados.description))
+           .catch(e => res.json(e))
+})
+
 module.exports = router;

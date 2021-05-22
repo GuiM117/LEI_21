@@ -14,6 +14,11 @@ module.exports.consultar = id => {
         .exec()
 }
 
+//
+module.exports.consultarMts = ids => {
+    return ViaAdmin.find({_id: { $in : ids}})
+}
+
 //Insere um unitMed
 module.exports.inserir = p => {
     let via = new ViaAdmin(p)
