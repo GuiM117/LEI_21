@@ -26,6 +26,13 @@ export default class PainelNovaPrescricao extends React.Component {
     console.log("novo medicamento")
   }
 
+  removeEntry = (e) => {
+    this.setState((prevState) => ({
+      entrys: [...prevState.entrys.pop()],
+    }));
+    console.log("medicamento removido")
+  }
+
   componentWillMount() {
     axios("http://localhost:4800/patients/listPatients").then(resp => {
       this.setState({patientsList: resp.data}, () => {
@@ -90,6 +97,13 @@ export default class PainelNovaPrescricao extends React.Component {
                 onClick={this.addEntry}
                 className="botao2"
               >Novo Medicamento
+          </Button>
+          <Button
+              variant="contained"
+              color="secondary"
+              onClick={this.removeEntry}
+              className="botao2"
+          >Remover Medicamento
           </Button>
         </Grid>
       </React.Fragment>
