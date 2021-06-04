@@ -16,9 +16,8 @@ function Login (props){
 
 
 
-    function login(){
-        console.log("AQUI antes do axios.get")
-        axios.get(`http://localhost:4800/users/login?email=${iState.email}&password=${iState.password}`)
+    login(){
+        axios.get(`http://localhost:4800/users/login?email=${this.state.email}&password=${this.state.password}`)
             .then (dados => {
                 if (dados["data"]["response"] === true) {
                     console.log("True")
@@ -55,7 +54,7 @@ function Login (props){
                         <input type="password" name="password" value={iState.password} onChange={event=> setState({...iState, password: event.target.value})} />
                     </div>
                 </div>
-                <button className="login2" onClick={event => login()}>
+                <button className="login2" onClick={event => this.login()}>
                     Login
                 </button>
 

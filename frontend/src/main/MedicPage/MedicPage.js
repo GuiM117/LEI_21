@@ -198,11 +198,11 @@ const MedicPage = () => {
                 {activeStep === steps.length ? (
                   <React.Fragment>
                     <Typography variant="h5" gutterBottom>
-                      Thank you for your order.
+                      A sua prescrição foi emitida com sucesso
                     </Typography>
                     <Typography variant="subtitle1">
-                      Your order number is #2001539. We have emailed your order confirmation, and will
-                      send you an update when your order has shipped.
+                      {`O número associado à sua prescrição é 60b55e4780116b0a70cd4225.
+                      Pode consultá-la sempre que possível no separador Prescrições.`}
                     </Typography>
                   </React.Fragment>
                 ) : (
@@ -211,7 +211,7 @@ const MedicPage = () => {
                     <div className={classes2.buttons}>
                       {activeStep !== 0 && (
                         <Button onClick={handleBack} className={classes2.button}>
-                          Back
+                          Anterior
                         </Button>
                       )}
                       <Button
@@ -220,7 +220,7 @@ const MedicPage = () => {
                         onClick={handleNext}
                         className={classes2.button}
                       >
-                        {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                        {activeStep === steps.length - 1 ? 'Emitir' : 'Próximo'}
                       </Button>
                     </div>
                   </React.Fragment>

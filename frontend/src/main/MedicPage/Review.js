@@ -22,17 +22,16 @@ const useStyles = makeStyles((theme) => ({
 export default function Review(props) {
     
   const products = [
-    { name: 'Medicamento A', dateInicio: '28-01-2022', dateFim: '02-02-2022', desc: 'descricao 1', qtd: '3', uni: 'mg' },
-    { name: 'Medicamento B', dateInicio: '28-05-2021', dateFim: '08-06-2022', desc: 'descricao 2', qtd: '4', uni: 'caixas' },
-    { name: 'Medicamento C', dateInicio: '03-06-2021', dateFim: '11-07-2022', desc: 'descricao 3', qtd: '5', uni: 'kg' },
-    { name: 'Medicamento D', dateInicio: '', dateFim: '', desc: '', qtd: '8', uni: 'L' },
+    { name: 'Amidotrizoato de meglumina 660 mg/mL + amidotrizoato de sódio 100 mg/mL', dateInicio: '01-06-2022', dateFim: '10-06-2021', desc: '1 comprimido ao jantar' },
+    { name: 'Bupivacaína 2.5 mg/mL', dateInicio: '01-06-2021', dateFim: '08-07-2022', desc: 'Aplicar 1 vez por dia' },
+    { name: 'Metilprednisolona 40 mg/mL', dateInicio: '01-06-2021', dateFim: '11-06-2021', desc: 'Tomar 1 cápsula de 12 em 12 horas'},
   ];
 
   const payments = [
-    { name: 'Numero Utente', detail: '123' },
-    { name: 'Nome', detail: 'Mr John Smith' },
-    { name: 'Data de Nascimento', detail: 'yyy-yyy-yyy' },
-    { name: 'Sexo', detail: 'M' }
+    { name: 'Numero Utente', detail: '123475876' },
+    { name: 'Nome', detail: 'Tifany Silva' },
+    { name: 'Data de Nascimento', detail: '25 Janeiro 1994' },
+    { name: 'Sexo', detail: 'Feminino' }
   ];
 
   const classes = useStyles();
@@ -40,13 +39,13 @@ export default function Review(props) {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Order summary
+        Revisão de Prescrição
       </Typography>
       <List disablePadding>
         {products.map((product) => (
           <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name+' '+product.dateInicio+' - '+product.dateFim} secondary={product.desc} />
-            <Typography variant="body2">{product.qtd + ' ' + product.uni}</Typography>
+            <ListItemText primary={product.name+' '} secondary={product.desc} />
+            <Typography variant="body2">{product.dateInicio+' - '+product.dateFim}</Typography>
           </ListItem>
         ))}
         
