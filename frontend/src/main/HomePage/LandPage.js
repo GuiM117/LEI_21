@@ -7,7 +7,7 @@ import loginImg from "../../assets/images/loginImg.png"
 const LandPage = () => {
   return (
     <div className="App">
-        <div className="nabBar">
+        <div className="navBar">
             <NavBar/>
         </div>
         <div className="main">
