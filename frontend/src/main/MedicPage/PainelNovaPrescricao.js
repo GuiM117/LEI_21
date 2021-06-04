@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+//import Button from '@material-ui/core/Button';
 import EntryInput from '../../components/EntryInput.js';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 const axios = require('axios')
@@ -87,7 +87,7 @@ export default class PainelNovaPrescricao extends React.Component {
           
           <EntryInput entries={entries} />
 
-          {/*<Grid item xs={12} sm={4}>
+         {/* <Grid item xs={12} sm={4}>
             <Button
                   variant="contained"
                   color="secondary"
@@ -97,6 +97,7 @@ export default class PainelNovaPrescricao extends React.Component {
             </Button>
 
           </Grid>*/}
+
         </Grid>
       </React.Fragment>
   );

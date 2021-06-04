@@ -100,11 +100,6 @@ export default class EntryInput extends React.Component {
         }
     }
 
-    async renderInfo(value){
-        let dciDescription = ""
-
-    }
-
     renderDCI (id) {
         if (id){
             axios.get(`http://localhost:4800/dci/getDCI?id=${id}`)
@@ -170,9 +165,9 @@ export default class EntryInput extends React.Component {
     return (
         this.state.entries.map((val, idx)=> {
             return(
-              <React.Fragment>
+              <React.Fragment key = {idx}>
                     <Grid item xs={12} sm={12}>
-                        <VirtualizeList drugList = {this.state.drugsList} sendData={this.handlePosology}/>
+                        <VirtualizeList drugList = {this.state.drugsList} sendData={this.handlePosology} className = "VirtualizeList"/>
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <TextField
@@ -182,6 +177,7 @@ export default class EntryInput extends React.Component {
                             fullWidth
                             multiline={true}
                             value = {this.state.entries[idx].currentDescription}
+                            
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -217,16 +213,17 @@ export default class EntryInput extends React.Component {
                         />
 
                     </Grid>
-                    <Grid item xs={12} sm={4}>
-                      <Button
-                          variant="contained"
-                          color="secondary"
-                          onClick = {this.handleNewEntry}
-                          className="botao2"
-                      >Novo Medicamento
-                      </Button>
-
-                  </Grid>
+                  {idx === this.state.entries.length - 1 &&
+                        <Grid item xs={12} sm={4}>
+                          <Button
+                              variant="contained"
+                              color="secondary"
+                              onClick = {this.handleNewEntry}
+                              className="botao2"
+                          >Novo Medicamento
+                          </Button>
+                      </Grid>
+                  }
               </React.Fragment>
             )
         })

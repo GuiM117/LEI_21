@@ -28,7 +28,7 @@ class Login extends Component {
     }
 
     login(){
-        axios.get(`http://localhost:5200/users/login?email=${this.state.email}&password=${this.state.password}`)
+        axios.get(`http://localhost:4800/users/login?email=${this.state.email}&password=${this.state.password}`)
             .then (dados => {
                 if (dados["data"]["response"] === true) {
                     console.log("True")
@@ -60,7 +60,7 @@ class Login extends Component {
                         <input type="password" name="password" value={this.state.password} onChange={event=> this.setPassword(event)} />
                     </div>
                 </div>
-                <button className="login2" onClick={event => this.login2()}>
+                <button className="login2" onClick={event => this.login()}>
                     Login
                 </button>
 
