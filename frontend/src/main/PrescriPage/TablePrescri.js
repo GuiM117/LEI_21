@@ -1,11 +1,8 @@
-
-import MenuAdmin from '../../components/Dashboard'
-
+//import MenuAdmin from '../../components/Dashboard'
 import PropTypes from 'prop-types';
-
 import Paper from '@material-ui/core/Paper';
 import React, { useState , useEffect } from 'react';
-import SearchBar from "material-ui-search-bar";
+//import SearchBar from "material-ui-search-bar";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -21,7 +18,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { SystemUpdate } from '@material-ui/icons';
+//import { SystemUpdate } from '@material-ui/icons';
 
 const axios = require('axios');
 

@@ -7,10 +7,14 @@ import Button from "@material-ui/core/Button";
 
 
 
+
 const entry = {
     entryId:0,
-    currentMedEntry:{},
-    currentDescription:""
+    detailedInformation:"",
+    chnm: 0,
+    initDate: "",
+    endDate: "",
+    posology:""
 }
 
 const initialState = {
@@ -34,132 +38,143 @@ export default class EntryInput extends React.Component {
     })
   }
 
-    handleCurrentDescription(idx,value){
-        // 1. Make a shallow copy of the items
-        let entriesAux = [...this.state.entries];
-        // 2. Make a shallow copy of the item you want to mutate
-        let entryAux = {...entriesAux[idx]};
-        // 3. Replace the property you're intested in
-        entryAux.currentDescription = "";
-        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-        entriesAux[idx] = entryAux;
-        // 5. Set the state to our new copy
-        this.setState({entriesAux});
+    handleChange() {
+        this.props.sendData(this.state.entries);
     }
 
-    handleCurrentEntry(idx,value){
-        // 1. Make a shallow copy of the items
-        let entriesAux = [...this.state.entries];
-        // 2. Make a shallow copy of the item you want to mutate
-        let entryAux = {...entriesAux[idx]};
-        // 3. Replace the property you're intested in
-        entryAux.currentMedEntry = value;
-        // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
-        entriesAux[idx] = entryAux;
-        // 5. Set the state to our new copy
-        this.setState({entriesAux});
-    }
-
+    /* Altera Array Entries*/
     handleNewEntry(){
 
         let entryAux = {
             entryId:this.state.entries.length,
-            currentMedEntry:{},
-            currentDescription:""
+            detailedInformation:"",
+            chnm: 0,
+            initDate: "",
+            endDate: "",
+            posology:""
         }
 
-        console.log(entryAux)
 
         this.setState(prevState => ({
             entries: [...prevState.entries, entryAux],
         }), console.log("Entriesss",this.state.entries));
     }
 
-    handlePosology = (value,idx) => {
-        //this.setState({entry: {...entry}})
-        if (value) {
-            this.setState({entry})
-            this.renderDCI(value.dci_ID)
-            this.renderPharmForm(value.farmForm_ID)
-            this.renderContainerForm(value.containerForm_ID)
-            this.renderViasAdministraçao(value.administrationForm_IDs)
-            this.renderCapacity(value.capacityUnit_ID, value.capacity)
+    /* Altera Array Entries */
+    handlePosology = (value) => {
+
+        if (value.data) {
+            let requestCapacity
+            let requestDCI
+            let requestPharmForm
+            let requestContainerForm
+            let requestViaAdmin
+            let requestsAux = []
+            let requestsStrings = []
+
+            if (value.data.dci_ID) {
+                requestDCI = axios.get(`http://localhost:4800/dci/getDCI?id=${value.data.dci_ID}`)
+                requestsAux.push(requestDCI)
+                requestsStrings.push("Designação Comum Internacional:")
+            }
+            if (value.data.capacityUnit_ID) {
+                requestCapacity = axios.get(`http://localhost:4800/unitMed/getUnitMed?id=${value.data.capacityUnit_ID}`)
+                requestsAux.push(requestCapacity)
+                requestsStrings.push(`Capacidade: ${value.data.capacity}`)
+            }
+            if (value.data.farmForm_ID) {
+                requestPharmForm = axios.get(`http://localhost:4800/pharmForm/getPharmForm?id=${value.data.farmForm_ID}`)
+                requestsAux.push(requestPharmForm)
+                requestsStrings.push(`Forma Farmacêutica:`)
+            }
+            if (value.data.containerForm_ID) {
+                requestContainerForm = axios.get(`http://localhost:4800/unitMed/getUnitMed?id=${value.data.containerForm_ID}`)
+                requestsAux.push(requestContainerForm)
+                requestsStrings.push("Forma de Apresentação:")
+            }
+            if (value.data.administrationForm_IDs.length != 0) {
+                requestViaAdmin = axios.get(`http://localhost:4800/viaAdmin/getViaAdmins?ids=${value.data.administrationForm_IDs}`)
+                requestsAux.push(requestViaAdmin)
+                requestsStrings.push("Via(s) de Administração:")
+            }
+
+            this.renderAll(requestsAux, requestsStrings, value.id, value.data.chnm)
         }
+
+        else this.updateEntries(value.id, "",-1)
     }
 
-    renderCapacity(id,capacity){
-        if (id){
-            axios.get(`http://localhost:4800/unitMed/getUnitMed?id=${id}`)
-                .then(data => {
-                    let description = ""
-                    if (this.state.entry.currentDescription !== "") description += "\n"
-                    description += `\nCapacidade: ${capacity} ${data.data}`
-                    this.setState({entry: {currentDescription: this.state.currentDescription.concat(description)}})
-                })
-                .catch (e => console.log(e))
-        }
-    }
+    renderAll (requestsAux, requestsStrings,id,chnm) {
 
-    renderDCI (id) {
-        if (id){
-            axios.get(`http://localhost:4800/dci/getDCI?id=${id}`)
-                .then(data => {
-                    let description = ""
-                    if (this.state.entry.currentDescription !== "") description += "\n"
-                    description += `Designação Comum Internacional: ${data.data}`
-                    this.setState({entry : {currentDescription: this.state.currentDescription.concat(description)}})
-                })
-                .catch (e => console.log(e))
-        }
-    }
+        axios.all(requestsAux).then(axios.spread((...responses) => {
+            let description = ""
+            let stringsLength = requestsStrings.length
 
-    renderPharmForm (id) {
-        if (id){
-            axios.get(`http://localhost:4800/pharmForm/getPharmForm?id=${id}`)
-                .then(data => {
-                    let description = ""
-                    if (this.state.entry.currentDescription !== "") description += "\n"
-                    description += `\nForma Farmacêutica: ${data.data}`
-                    this.setState({entry: {currentDescription: this.state.currentDescription.concat(description)}})
-                })
-                .catch (e => console.log(e))
-        }
-    }
+            for (let i = 0; i < stringsLength; i++ ) {
 
-    renderContainerForm(id){
-        if (id){
-            axios.get(`http://localhost:4800/unitMed/getUnitMed?id=${id}`)
-                .then(data => {
-                    let description = ""
-                    if (this.state.entry.currentDescription !== "") description += "\n"
-                    description += `\nForma de Apresentação: ${data.data}`
-                    this.setState({entry: {currentDescription: this.state.currentDescription.concat(description)}})
-                })
-                .catch (e => console.log(e))
-        }
-    }
+                if ( requestsStrings[i]==="Via(s) de Administração:"){
 
-    renderViasAdministraçao(ids){
-        if (ids){
-            axios.get(`http://localhost:4800/viaAdmin/getViaAdmins?ids=${ids}`)
-                .then(data => {
-                    let viasArray = data.data
-                    let description = ""
-                    if (this.state.entry.currentDescription !== "") description += "\n"
-                    description += "\nVia(s) de Administração: "
+                    description += `${requestsStrings[i]}`
+                    let viasAdmin = responses[i].data
 
-                    for(let i = 0; i< viasArray.length ;i++){
-                        if (i === viasArray.length - 1) description += `${viasArray[i].description}`
-
-                        else description += `${viasArray[i].description}, `
+                    for(let j = 0; j < viasAdmin.length ;j++){
+                        if (j === responses[i]["data"].length - 1) description += `${responses[i]["data"][j].description}`
+                        else description += `${responses.data[i]["data"][j].description}, `
                     }
-                    this.setState({entry: {currentDescription: this.state.currentDescription.concat(description)}})
-                })
-                .catch (e => console.log(e))
-        }
+                }
+                else if (i === stringsLength -1 ) description += `${requestsStrings[i]} ${responses[i].data}`
+                else description += `${requestsStrings[i]} ${responses[i].data}\n`
+
+            }
+
+            this.updateEntries(id,description,chnm)
+        })).catch(errors => {console.log("error, invalid requests", errors)})
     }
 
+    /* Altera Array Entries */
+    updateEntries(id, description, chnm) {
 
+        let entriesAux = [...this.state.entries];
+        let entryAux = {...entriesAux[id]};
+        entryAux.detailedInformation = description;
+        entryAux.chnm = chnm
+        entriesAux[id] = entryAux;
+
+        this.setState({entries: entriesAux} , () => {
+            console.log(`Entry = ${id}: `, this.state.entries[id])
+            this.handleChange()
+        });
+    }
+
+    /* Altera Array Entries */
+    setDate(idx,event, string) {
+        let entriesAux = [...this.state.entries];
+        let entryAux = {...entriesAux[idx]};
+
+        if (string === "beginDate") entryAux.initDate = event.target.value
+        else entryAux.endDate = event.target.value
+
+        entriesAux[idx] = entryAux;
+
+        this.setState({entries: entriesAux}, () => {
+            this.handleChange()
+            console.log ("Entries: ",this.state.entries[idx])});
+    }
+
+    /* Altera Array Entries */
+    setDescription (idx,event){
+        let entriesAux = [...this.state.entries];
+        let entryAux = {...entriesAux[idx]};
+
+        entryAux.posology = event.target.value
+
+        entriesAux[idx] = entryAux;
+
+        this.setState({entries: entriesAux}, () => {
+            this.handleChange()
+            console.log ("Entries: ",this.state.entries[idx])
+        });
+    }
 
   render() {
     return (
@@ -167,7 +182,7 @@ export default class EntryInput extends React.Component {
             return(
               <React.Fragment key = {idx}>
                     <Grid item xs={12} sm={12}>
-                        <VirtualizeList drugList = {this.state.drugsList} sendData={this.handlePosology} className = "VirtualizeList"/>
+                        <VirtualizeList drugList = {this.state.drugsList} sendData={this.handlePosology} id={idx} className = "VirtualizeList"/>
                     </Grid>
                     <Grid item xs={12} sm={12}>
                         <TextField
@@ -176,7 +191,7 @@ export default class EntryInput extends React.Component {
                             disabled={true}
                             fullWidth
                             multiline={true}
-                            value = {this.state.entries[idx].currentDescription}
+                            value = {this.state.entries[idx].detailedInformation}
                             
                         />
                     </Grid>
@@ -185,11 +200,10 @@ export default class EntryInput extends React.Component {
                           id="DataInicio"
                           label="Data Inicio"
                           type="date"
-                          defaultValue="2021-05-24"
+                          defaultValue={new Date().toISOString().slice(0, 10)}
                           className="DataInicio"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
+                          onChange={event => this.setDate(idx,event,"beginDate")}
+
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -197,11 +211,9 @@ export default class EntryInput extends React.Component {
                           id="DataFim"
                           label="Vencimento"
                           type="date"
-                          defaultValue="2021-05-24"
+                          defaultValue={new Date().toISOString().slice(0, 10)}
                           className="DataFim"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
+                          onChange={event => this.setDate(idx,event,"end")}
                       />
                     </Grid>
                     <Grid item xs={12} sm={12}>
@@ -210,10 +222,12 @@ export default class EntryInput extends React.Component {
                             variant="outlined"
                             fullWidth
                             multiline={true}
+                            onChange={event => this.setDescription(idx,event)}
+
                         />
 
                     </Grid>
-                  {idx === this.state.entries.length - 1 &&
+                    {idx === this.state.entries.length - 1 &&
                         <Grid item xs={12} sm={4}>
                           <Button
                               variant="contained"
@@ -223,7 +237,7 @@ export default class EntryInput extends React.Component {
                           >Novo Medicamento
                           </Button>
                       </Grid>
-                  }
+                    }
               </React.Fragment>
             )
         })

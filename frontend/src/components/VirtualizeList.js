@@ -106,12 +106,18 @@ const renderGroup = (params) => [
     params.children,
 ];
 
+
 export default function Virtualize(props) {
     const classes = useStyles();
 
+    const currentID = props.id
+    console.log ("Id, virtualize List", currentID)
 
     function handleChange(value) {
-        let medEntry = value
+        let medEntry = {
+            data: value,
+            id: currentID
+        }
         props.sendData(medEntry);
     }
 

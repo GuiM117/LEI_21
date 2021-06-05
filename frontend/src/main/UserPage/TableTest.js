@@ -1,5 +1,5 @@
 
-import MenuAdmin from '../../components/Dashboard'
+//import MenuAdmin from '../../components/Dashboard'
 
 import React, { useState , useEffect } from 'react';
 import SearchBar from "material-ui-search-bar";
@@ -13,7 +13,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import Typography from '@material-ui/core/Typography';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { SystemUpdate } from '@material-ui/icons';
+//import { SystemUpdate } from '@material-ui/icons';
 
 const axios = require('axios');
 

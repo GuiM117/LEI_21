@@ -100,7 +100,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const useStyles2 = makeStyles((theme) => ({
   appBar: {
     position: 'relative',
@@ -137,7 +136,6 @@ const useStyles2 = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
   },
 }));
-
 
 const steps = ['Escolha Medicamentos', 'Revisão Prescrição'];
 

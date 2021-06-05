@@ -7,14 +7,10 @@ import EntryInput from '../../components/EntryInput.js';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 const axios = require('axios')
 
-const entry = {
-  entryId:0,
-  currentMedEntry:{},
-  currentDescription:""
-}
+
 
 const initialState = {
-  entries: [entry],
+  entries: [],
   patientsList: [],
   patient:{}
 }
@@ -30,6 +26,10 @@ export default class PainelNovaPrescricao extends React.Component {
         console.log(this.state)
       })
     })
+  }
+
+  handleEntries = (value) => {
+    console.log("Entries updated", value)
   }
 
   handleSelectedName(value) {
@@ -85,7 +85,7 @@ export default class PainelNovaPrescricao extends React.Component {
             />
           </Grid>
           
-          <EntryInput entries={entries} />
+          <EntryInput sendData={this.handleEntries} />
 
          {/* <Grid item xs={12} sm={4}>
             <Button
