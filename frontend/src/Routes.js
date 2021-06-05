@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Switch } from "react-router-dom";
-import LandPage from './main/LandPage';
+import LandPage from './main/HomePage/LandPage';
 import MedicPage from './main/MedicPage/MedicPage';
 import UserPage from './main/UserPage/UserPage';
 import PrescriPage from './main/PrescriPage/PrescriPage';
-
+import Alerts from './components/Alerts'
 
 const Routes = () => (
         <Switch>
