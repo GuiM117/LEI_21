@@ -8,37 +8,11 @@
     background: #FFFFFF;
 }
 
-.login{
-    position: absolute;
-    width: 110px;
-    height: 46px;
-    left: 1685px;
-    top: 26px;
-
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 21px;
-    line-height: 10px;
-
-    color: #FFFFFF;
-
-    position: absolute;
-    width: 185px;
-    height: 40px;
-    left: 1621px;
-    top: 25px;
-    border: none;
-    background: linear-gradient(268.92deg, #52DC89 0%, #1A964C 100%);
-    box-shadow: 0px 11px 20px rgba(52, 177, 102, 0.57);
-    border-radius: 8px;
-}
-
 .suport{
     position: absolute;
     width: 108px;
     height: 34px;
-    left: 1475px;
+    left: 1700px;
     top: 29px;
 
     text-decoration: none;
@@ -57,4 +31,11 @@
     top: 5px;
     width: 260px;
     height: 75px;
+}
+.logoIMG {
+    position: absolute;
+    left: 50px;
+    top: 2px;
+    width: 330px;
+    height: 90px;
 }

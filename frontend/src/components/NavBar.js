@@ -10,10 +10,7 @@ const navBar = () => {
             <div>
                 <img className="logoIMG" src={logo} alt={"logo"}></img>
             </div>
-            <a className="suport" href="url">Suporte</a>
-            <button className="login">
-                Login
-            </button>
+            <a className="suport" href="url">About us</a>
         </div>
     )
 }
