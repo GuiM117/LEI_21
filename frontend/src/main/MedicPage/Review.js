@@ -21,18 +21,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review(props) {
     
-  const products = [
+  const entries = [
     { name: 'Amidotrizoato de meglumina 660 mg/mL + amidotrizoato de sódio 100 mg/mL', dateInicio: '01-06-2022', dateFim: '10-06-2021', desc: '1 comprimido ao jantar' },
     { name: 'Bupivacaína 2.5 mg/mL', dateInicio: '01-06-2021', dateFim: '08-07-2022', desc: 'Aplicar 1 vez por dia' },
     { name: 'Metilprednisolona 40 mg/mL', dateInicio: '01-06-2021', dateFim: '11-06-2021', desc: 'Tomar 1 cápsula de 12 em 12 horas'},
   ];
 
-  const payments = [
-    { name: 'Numero Utente', detail: '123475876' },
-    { name: 'Nome', detail: 'Tifany Silva' },
-    { name: 'Data de Nascimento', detail: '25 Janeiro 1994' },
-    { name: 'Sexo', detail: 'Feminino' }
+  const patientInfo = [
+    { name: 'Numero Utente', detail: props.prescription.patientInfo.patientNumber },
+    { name: 'Nome', detail: props.prescription.patientInfo.name },
+    { name: 'Data de Nascimento', detail: props.prescription.patientInfo.birth_date },
+    { name: 'Sexo', detail: props.prescription.patientInfo.sex },
+    {name: "Número de Episódio", detail: props.prescription.patientInfo.episode_number}
   ];
+
+  console.log("Props Review", props.prescription.entries)
 
   const classes = useStyles();
 
@@ -42,10 +45,10 @@ export default function Review(props) {
         Revisão de Prescrição
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name+' '} secondary={product.desc} />
-            <Typography variant="body2">{product.dateInicio+' - '+product.dateFim}</Typography>
+        {props.prescription.entries.map((ent) => (
+          <ListItem className={classes.listItem} key={ent.name}>
+            <ListItemText primary={ent.name+' '} secondary={ent.entry.posology} />
+            <Typography variant="body2">{ent.entry.initDate+' - '+ent.entry.endDate}</Typography>
           </ListItem>
         ))}
         
@@ -56,13 +59,13 @@ export default function Review(props) {
             Detalhes Paciente
           </Typography>
           <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
+            {patientInfo.map((patient) => (
+              <React.Fragment key={patient.name}>
                 <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
+                  <Typography gutterBottom>{patient.name}</Typography>
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
+                  <Typography gutterBottom>{patient.detail}</Typography>
                 </Grid>
               </React.Fragment>
             ))}

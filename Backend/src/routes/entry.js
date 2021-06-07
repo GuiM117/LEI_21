@@ -19,9 +19,7 @@ router.post('/registEntry', function(req,res) {
             chnm: req.body.chnm,
             initDate: req.body.initDate,
             endDate: req.body.endDate,
-            description: req.body.description,
-            dosagePerDay: req.body.dosagePerDay,
-            dosageUnitID: req.body.dosageUnitID
+            description: req.body.description
         }
         Entry.inserir(Presc)
             .then(dados => res.json(Presc))

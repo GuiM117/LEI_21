@@ -8,17 +8,24 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 const axios = require('axios')
 
 
+const patient = {
+  name:"",
+  patientNumber:-1,
+  sex:"",
+  birth_date:"",
+  episode_number:0
+
+}
 
 const initialState = {
   entries: [],
   patientsList: [],
-  patient:{}
+  patientInfo : {...patient}
 }
 
 export default class PainelNovaPrescricao extends React.Component {
 
   state = { ...initialState  }
-
 
   componentWillMount() {
     axios("http://localhost:4800/patients/listPatients").then(resp => {
@@ -29,24 +36,52 @@ export default class PainelNovaPrescricao extends React.Component {
   }
 
   handleEntries = (value) => {
-    console.log("Entries updated", value)
-  }
-
-  handleSelectedName(value) {
-    let auxPatient = {
-      name:value.name,
-      patientNumber: value.patientNumber,
-      sex:value.sex,
-      birth_date:value.birth_date,
-      episode_number:value.episode_number
-    }
-    this.setState({patient: { ...auxPatient}}, () => {
-      console.log("Estado",this.state)
+    this.setState({entries: value}, () => {
+      let prescription = {
+        entries: this.state.entries,
+        patientInfo: this.state.patientInfo
+      }
+      this.props.sendData(prescription);
+      console.log("Entries updated", this.state.entries)
     })
   }
 
-  handleSelectedPatientNumber(value) {
-    this.setState({ patient : {patientNumber: value } }, () => {
+  handleSelectedName(value) {
+    if (value) {
+      let auxPatient = {
+        name:value.name,
+        patientNumber: value.patientNumber,
+        sex:value.sex,
+        birth_date:value.birth_date,
+        episode_number:value.episode_number
+      }
+      this.setState({patientInfo: { ...auxPatient}}, () => {
+        let prescription = {
+          entries: this.state.entries,
+          patientInfo: this.state.patientInfo
+        }
+        this.props.sendData(prescription);
+        console.log("Estado",this.state)
+      })
+    } else {
+      this.setState({patientInfo: { ...patient}}, () => {
+        let prescription = {
+          entries: this.state.entries,
+          patientInfo: this.state.patientInfo
+        }
+        this.props.sendData(prescription);
+        console.log("Estado",this.state)
+      })
+    }
+  }
+
+  handleSelectedPatientNumber(event) {
+    this.setState({ patient : {patientNumber: event.target.value } }, () => {
+      let prescription = {
+        entries: this.state.entries,
+        patientInfo: this.state.patientInfo
+      }
+      this.props.sendData(prescription);
       console.log(this.state.patient)
     })
   }
@@ -69,8 +104,8 @@ export default class PainelNovaPrescricao extends React.Component {
                 label="Nº de Utente"
                 variant="outlined"
                 style={{width: 370}}
-                value={this.state.patient.patientNumber}
-                onChange={(event, value) => this.handleSelectedPatientNumber(value)}
+                value={this.state.patientInfo.patientNumber}
+                onChange={(event,value)=> this.handleSelectedPatientNumber(value)}
             />
           </Grid>
 

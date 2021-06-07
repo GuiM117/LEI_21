@@ -6,15 +6,19 @@ import VirtualizeList from "./VirtualizeList";
 import Button from "@material-ui/core/Button";
 
 
+const entryInit = {
+    chnm: 0,
+    initDate: "",
+    endDate: "",
+    posology:""
+}
 
 
 const entry = {
     entryId:0,
     detailedInformation:"",
-    chnm: 0,
-    initDate: "",
-    endDate: "",
-    posology:""
+    name:"",
+    entry: { ...entryInit}
 }
 
 const initialState = {
@@ -48,10 +52,7 @@ export default class EntryInput extends React.Component {
         let entryAux = {
             entryId:this.state.entries.length,
             detailedInformation:"",
-            chnm: 0,
-            initDate: "",
-            endDate: "",
-            posology:""
+            entry : {...entryInit}
         }
 
 
@@ -92,19 +93,19 @@ export default class EntryInput extends React.Component {
                 requestsAux.push(requestContainerForm)
                 requestsStrings.push("Forma de Apresentação:")
             }
-            if (value.data.administrationForm_IDs.length != 0) {
+            if (value.data.administrationForm_IDs.length !== 0) {
                 requestViaAdmin = axios.get(`http://localhost:4800/viaAdmin/getViaAdmins?ids=${value.data.administrationForm_IDs}`)
                 requestsAux.push(requestViaAdmin)
                 requestsStrings.push("Via(s) de Administração:")
             }
 
-            this.renderAll(requestsAux, requestsStrings, value.id, value.data.chnm)
+            this.renderAll(requestsAux, requestsStrings, value.id, value.data.chnm,value.data.name)
         }
 
-        else this.updateEntries(value.id, "",-1)
+        else this.updateEntries(value.id, "",-1,"")
     }
 
-    renderAll (requestsAux, requestsStrings,id,chnm) {
+    renderAll (requestsAux, requestsStrings,id,chnm,name) {
 
         axios.all(requestsAux).then(axios.spread((...responses) => {
             let description = ""
@@ -127,17 +128,18 @@ export default class EntryInput extends React.Component {
 
             }
 
-            this.updateEntries(id,description,chnm)
+            this.updateEntries(id,description,chnm,name)
         })).catch(errors => {console.log("error, invalid requests", errors)})
     }
 
     /* Altera Array Entries */
-    updateEntries(id, description, chnm) {
+    updateEntries(id, description, chnm,name) {
 
         let entriesAux = [...this.state.entries];
         let entryAux = {...entriesAux[id]};
         entryAux.detailedInformation = description;
-        entryAux.chnm = chnm
+        entryAux.entry.chnm = chnm
+        entryAux.name = name
         entriesAux[id] = entryAux;
 
         this.setState({entries: entriesAux} , () => {
@@ -151,8 +153,8 @@ export default class EntryInput extends React.Component {
         let entriesAux = [...this.state.entries];
         let entryAux = {...entriesAux[idx]};
 
-        if (string === "beginDate") entryAux.initDate = event.target.value
-        else entryAux.endDate = event.target.value
+        if (string === "beginDate") entryAux.entry.initDate = event.target.value
+        else entryAux.entry.endDate = event.target.value
 
         entriesAux[idx] = entryAux;
 
@@ -166,7 +168,7 @@ export default class EntryInput extends React.Component {
         let entriesAux = [...this.state.entries];
         let entryAux = {...entriesAux[idx]};
 
-        entryAux.posology = event.target.value
+        entryAux.entry.posology = event.target.value
 
         entriesAux[idx] = entryAux;
 

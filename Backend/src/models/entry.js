@@ -21,14 +21,6 @@ const entrySchema = new mongoose.Schema({
     description : {
         type: String,
         required: true
-    },
-    dosagePerDay : {
-        type: Number,
-        required: true
-    },
-    dosageUnitID: {
-        type: Number,
-        required: true
     }
 });
 

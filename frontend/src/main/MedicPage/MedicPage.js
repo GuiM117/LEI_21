@@ -137,30 +137,49 @@ const useStyles2 = makeStyles((theme) => ({
   },
 }));
 
+
 const steps = ['Escolha Medicamentos', 'Revisão Prescrição'];
 
-function getStepContent(step) {
 
-  switch (step) {
-    case 0:
-      return <React.Fragment>
-          <PainelNovaPrescricao />
-            </React.Fragment>
-    case 1:
-      return <React.Fragment>
-              <Review />
-            </React.Fragment> 
-    default:
-      throw new Error('Unknown step');
-  }
+
+const prescription = {
+  patientInfo: {},
+  entries : []
 }
 
-const MedicPage = () => {
+const MedicPage = (props) => {
 
   const classes = useStyles();
   const classes2 = useStyles2();
 
   const [activeStep, setActiveStep] = React.useState(0);
+  const [prescription,setPrescription] = React.useState({entries:[],patientInfo:{}})
+
+  const handleChange = (value) => {
+    console.log("Entries",value.entries)
+    let precriptionAux = {
+      entries: value.entries,
+      patientInfo: {...value.patientInfo}
+    }
+    setPrescription(precriptionAux)
+    console.log("Entries MedicPage", prescription)
+  }
+
+  function getStepContent(step) {
+
+    switch (step) {
+      case 0:
+        return <React.Fragment>
+          <PainelNovaPrescricao sendData={handleChange}/>
+        </React.Fragment>
+      case 1:
+        return <React.Fragment>
+          <Review prescription={prescription}/>
+        </React.Fragment>
+      default:
+        throw new Error('Unknown step');
+    }
+  }
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);

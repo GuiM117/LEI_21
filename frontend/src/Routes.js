@@ -11,7 +11,7 @@ const Routes = () => (
             <Route path='/medic' component={MedicPage} />
             <Route path='/medic_users' component={UserPage} />
             <Route path='/prescriptions' component={PrescriPage} />
-            <Route exact path='/' component={LandPage} />
+            <Route exact path='/' component={Alerts} />
         </Switch>
 );
 
