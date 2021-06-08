@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField'
 import axios from "axios";
 import VirtualizeList from "./VirtualizeList";
 import Button from "@material-ui/core/Button";
-
+import { withSnackbar } from 'notistack';
 
 const entryInit = {
     chnm: 0,
@@ -23,10 +23,14 @@ const entry = {
 
 const initialState = {
     drugsList: [],
-    entries: [{...entry}]
+    entries: [{...entry}],
+    chnms : []
 }
 
-export default class EntryInput extends React.Component {
+
+
+class EntryInput extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {...initialState}
@@ -142,11 +146,57 @@ export default class EntryInput extends React.Component {
         entryAux.name = name
         entriesAux[id] = entryAux;
 
+        this.updateArrayChnms(id,chnm)
+
         this.setState({entries: entriesAux} , () => {
             console.log(`Entry = ${id}: `, this.state.entries[id])
             this.handleChange()
         });
     }
+
+    updateArrayChnms(id,chnm){
+
+        if (chnm === -1) {
+            let chnms = this.state.chnms
+            chnms[id] = -1
+            this.setState({chnms: chnms}, ()=> {
+                console.log("Delete",this.state.chnms)
+            })
+        }
+        else {
+            let chnms = this.state.chnms
+            chnms[id] = chnm
+            this.setState({chnms: chnms}, ()=> {
+                console.log("Add",this.state.chnms)
+            })
+
+            if (chnms.length > 1) {
+                axios.get(`http://localhost:4800/interactions/interaction?chnms=${chnms}`)
+                    .then(dados => {
+                        let alerts = dados.data
+                        alerts.map(aler => {
+                            this.props.enqueueSnackbar("Interação entre Medicamentos Perigosa", {
+                                variant: 'warning',
+                                autoHideDuration: 3000,
+                                action: key => (
+                                    <React.Fragment>
+                                        <Button onClick={() => { alert(` ${aler.description}`); }}>
+                                            Alert
+                                        </Button>
+                                        <Button onClick={() => { this.props.closeSnackbar(key) }}>
+                                            Dismiss
+                                        </Button>
+                                    </React.Fragment>
+                                ),
+                            });
+                        })
+                        console.log(dados)
+                    })
+                    .catch(err => console.log)
+            }
+        }
+    }
+
 
     /* Altera Array Entries */
     setDate(idx,event, string) {
@@ -246,3 +296,5 @@ export default class EntryInput extends React.Component {
     )
   }
 }
+
+export default withSnackbar(EntryInput)

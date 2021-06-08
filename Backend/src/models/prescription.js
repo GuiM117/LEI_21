@@ -10,6 +10,10 @@ const prescriptionSchema = new mongoose.Schema({
         type: Number,
         required : true
     },
+    doctorID: {
+        type:ObjectID,
+        required: true
+    },
     entryID : {
         type: [ObjectID],
         required: true

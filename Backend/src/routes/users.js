@@ -37,8 +37,7 @@ router.get('/login', ((req, res) => {
             else res.json({response: false})
         })
         .catch(error => {
-            console.log("Erro")
-            res.status(404).json(error)
+            res.json({response: false})
         })
 }))
 

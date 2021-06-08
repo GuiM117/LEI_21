@@ -7,12 +7,9 @@ module.exports.listar = () => {
         .exec()
 }
 
-
-/*module.exports.consultar =  => {
-    return Interactions
-        .findOne({_id: id})
-        .exec()
-}*/
+module.exports.findInteraction = (chnm1,chnm2) => {
+    return Interactions.find({$or: [{chnm1: chnm1, chnm2: chnm2}, {chnm1:chnm2, chnm2:chnm1}]})
+}
 
 //Insere um Entry
 module.exports.inserir = p => {
@@ -24,8 +21,4 @@ module.exports.inserirMts = ints => {
     return Interactions
         .insertMany(ints)
 }
-/*
-//Remove um Entry
-module.exports.remover = id => {
-    return Interactions.deleteOne({_id: id})
-}*/
+

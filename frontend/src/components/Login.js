@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import logo from '../assets/images/logo.png'
+import { withSnackbar } from 'notistack';
 import '../styles/Login.css'
 import {withRouter} from "react-router";
 import Button from '@material-ui/core/Button';
@@ -37,10 +37,18 @@ class Login extends Component {
         axios.get(`http://localhost:4800/users/login?email=${this.state.formData.email}&password=${this.state.formData.password}`)
             .then (dados => {
                 if (dados["data"]["response"] === true) {
-                    console.log("True")
+                    this.props.enqueueSnackbar("Login Efectuado com Sucesso", {
+                        variant: 'success',
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    });
                     this.props.history.push('/medic')
                 }else{
-                    console.log("False")
+                    this.props.enqueueSnackbar("Password e/ou email incorretos. Tente novamente", {
+                        variant: 'error',
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    });
                 }
             })
             .catch(error => console.log(error))
@@ -94,4 +102,4 @@ class Login extends Component {
     }
 }
 
-export default withRouter(Login)
+export default withSnackbar(withRouter(Login))
