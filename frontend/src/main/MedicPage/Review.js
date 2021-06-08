@@ -47,7 +47,7 @@ export default function Review(props) {
       <List disablePadding>
         {props.prescription.entries.map((ent) => (
           <ListItem className={classes.listItem} key={ent.name}>
-            <ListItemText primary={ent.name+' '} secondary={ent.entry.posology} />
+            <ListItemText primary={ent.name+' '} secondary={ent.entry.description} />
             <Typography variant="body2">{ent.entry.initDate+' - '+ent.entry.endDate}</Typography>
           </ListItem>
         ))}

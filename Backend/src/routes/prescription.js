@@ -17,8 +17,12 @@ router.post('/registPrescription', function(req,res) {
     if(req.body.name != ""){
         let Presc = {
             patientNumber: req.body.patientNumber,
-            entryID: req.body.entryID
+            entryID: req.body.entryID,
+            doctorID: req.body.doctorID
         }
+
+        console.log(Presc)
+
         Prescription.inserir(Presc)
             .then(dados => res.json(Presc))
             .catch(e => res.json(e))

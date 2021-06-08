@@ -33,7 +33,7 @@ router.get('/login', ((req, res) => {
     }
     User.findEmail(user.email)
         .then(dados => {
-            if ( user.password === dados.password) res.json({response: true})
+            if ( user.password === dados.password) res.json({response: true, id: dados._id})
             else res.json({response: false})
         })
         .catch(error => {

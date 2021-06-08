@@ -20,6 +20,11 @@ module.exports.inserir = p => {
     return newPatient.save()
 }
 
+module.exports.inserirMts = entries => {
+    return Entry
+        .insertMany(entries)
+}
+
 //Remove um Entry
 module.exports.remover = id => {
     return Entry.deleteOne({_id: id})

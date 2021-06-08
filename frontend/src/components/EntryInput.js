@@ -10,7 +10,7 @@ const entryInit = {
     chnm: 0,
     initDate: "",
     endDate: "",
-    posology:""
+    description:""
 }
 
 
@@ -218,7 +218,7 @@ class EntryInput extends React.Component {
         let entriesAux = [...this.state.entries];
         let entryAux = {...entriesAux[idx]};
 
-        entryAux.entry.posology = event.target.value
+        entryAux.entry.description = event.target.value
 
         entriesAux[idx] = entryAux;
 

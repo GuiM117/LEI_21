@@ -22,10 +22,24 @@ router.post('/registEntry', function(req,res) {
             description: req.body.description
         }
         Entry.inserir(Presc)
-            .then(dados => res.json(Presc))
+            .then(dados => res.json(dados._id))
             .catch(e => res.json(e))
     }
 })
 
+router.post('/registEntries', function(req,res) {
+        let entries = req.body.entries
+
+
+        Entry.inserirMts(entries)
+            .then(dados => {
+                let idEntries = []
+                for (let i = 0; i< dados.length; i++) idEntries.push(dados[i]._id)
+                console.log(idEntries)
+                res.json({idEntries: idEntries})
+            })
+            .catch(e => res.json(e))
+
+})
 
 module.exports = router;

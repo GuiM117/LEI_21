@@ -26,6 +26,7 @@ class Login extends Component {
         formData[event.target.name] = event.target.value;
         this.setState({ formData });
     }
+
     handleSubmit = () => {
         this.setState({ submitted: true }, () => {
             setTimeout(() => this.setState({ submitted: false }), 5000);
@@ -42,7 +43,10 @@ class Login extends Component {
                         vertical: 'bottom',
                         horizontal: 'center',
                     });
-                    this.props.history.push('/medic')
+                    this.props.history.push({
+                        pathname: '/medic',
+                        state: {id: dados.data.id }
+                    })
                 }else{
                     this.props.enqueueSnackbar("Password e/ou email incorretos. Tente novamente", {
                         variant: 'error',

@@ -15,7 +15,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-
+import axios from "axios";
 import PainelNovaPrescricao from './PainelNovaPrescricao';
 import Review from './Review';
 
@@ -154,6 +154,8 @@ const MedicPage = (props) => {
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [prescription,setPrescription] = React.useState({entries:[],patientInfo:{}})
+  const doctorID = props.location.state.id
+
 
   const handleChange = (value) => {
     console.log("Entries",value.entries)
@@ -183,6 +185,28 @@ const MedicPage = (props) => {
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
+
+    // EMITIR PRESCRIÇÃO
+    if (activeStep === 1) {
+      let entries = prescription.entries
+      let reqEntries = []
+
+      for (let i = 0;i<entries.length;i++){
+        //console.log(entries[i].entry, entries[i])
+        reqEntries.push({...entries[i].entry})
+      }
+      console.log("ReqEntries", reqEntries)
+      axios.post("http://localhost:4800/entry/registEntries", {entries: reqEntries} )
+          .then(dados => {
+            let idEntries = dados.data.idEntries
+
+            axios.post("http://localhost:4800/prescriptions/registPrescription", {patientNumber: prescription.patientInfo.patientNumber, doctorID: doctorID, entryID: idEntries})
+                .then (dados => console.log("Done"))
+                .catch(error => console.log("Error"))
+          })
+          .catch(error => console.log(error))
+
+    }
   };
 
   const handleBack = () => {
