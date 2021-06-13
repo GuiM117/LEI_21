@@ -1,22 +1,20 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-
+import { mainListItems, secondaryListItems } from './Menu-Dash.js';
 import clsx from 'clsx';
-import CssBaseline from '@material-ui/core/CssBaseline';
-
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+import AppBar from '@material-ui/core/AppBar';
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import logoSistema from '../assets/images/logo2.png';
 
-import { mainListItems, secondaryListItems } from './Menu-Dash.js';
-import logoSistema from '../assets/images/logo.png';
+import '../styles/Dashboard.css'
 
 const drawerWidth = 240;
 
@@ -136,8 +134,8 @@ export default function MenuAdmin({title}){
         }}
         open={open}
         >
-            <div className={classes.toolbarIcon}>
-              <img style={{width:150,height:50}} src={logoSistema} alt="Logo sistema" />
+            <div className="logoDashboard">
+              <img src={logoSistema} alt="Logo sistema" className="logoDashboard" />
             <IconButton onClick={handleDrawerClose}>
                 <ChevronLeftIcon />
             </IconButton>

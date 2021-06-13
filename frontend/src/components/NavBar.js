@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../assets/images/logo.png'
+import logo from '../assets/images/logo2.png'
 import '../styles/NavBar.css'
 
 
@@ -10,7 +10,7 @@ const navBar = () => {
             <div>
                 <img className="logoIMG" src={logo} alt={"logo"}></img>
             </div>
-            <a className="suport" href="url">About us</a>
+            {/*<a className="suport" href="url">About us</a>*/}
         </div>
     )
 }

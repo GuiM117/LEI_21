@@ -5,6 +5,7 @@ import axios from "axios";
 import VirtualizeList from "./VirtualizeList";
 import Button from "@material-ui/core/Button";
 import { withSnackbar } from 'notistack';
+import {Divider} from "@material-ui/core";
 
 const entryInit = {
     chnm: 0,
@@ -279,10 +280,15 @@ class EntryInput extends React.Component {
                         />
 
                     </Grid>
+                    {this.state.entries.length > 1 &&
+                      <Grid item xs={12} sm={12}>
+                        <Divider/>
+                      </Grid>
+                      }
                     {idx === this.state.entries.length - 1 &&
                         <Grid item xs={12} sm={4}>
                           <Button
-                              variant="contained"
+                              variant="outlined"
                               color="secondary"
                               onClick = {this.handleNewEntry}
                               className="botao2"

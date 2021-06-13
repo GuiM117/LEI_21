@@ -24,6 +24,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    background: '#DCF9FF',
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -215,7 +216,8 @@ const MedicPage = (props) => {
 
   return (
 
-    <div className={classes.root}>
+      <div className="body">
+        <div className={classes.root}>
       <MenuAdmin/>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
@@ -273,6 +275,8 @@ const MedicPage = (props) => {
         </Container>
       </main>
       </div>
+      </div>
+
   );
 }
 

@@ -131,7 +131,7 @@ export default function Virtualize(props) {
             renderGroup={renderGroup}
             options={props.drugList.sort((a, b) => (a.name > b.name) ? 1 : -1)}
             getOptionLabel={option => option.name}
-            groupBy={(option) => option.name[0].toUpperCase()}
+            groupBy={(option) => option.name[0]}
             renderInput={(params) => <TextField {...params} variant="outlined" label="Substâncias Ativas" />}
             renderOption={(option) => <Typography noWrap>{option.name}</Typography>}
             onChange={(event, value) => handleChange(value)}

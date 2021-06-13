@@ -33,12 +33,8 @@ router.get("/interaction", (req,res) => {
     let chnms = req.query.chnms.split(',')
     let interactions = []
 
-    console.log(chnms, chnms.length)
-
-    //console.log(chnms)
     for(let i=0; i < chnms.length; i++) {
         let chnm1 = chnms[i]
-        //console.log("Aqui")
         for (let j = i + 1; j < chnms.length; j++){
             let chnm2 = chnms[j]
             let interac = Interactions.findInteraction(chnm1,chnm2)

@@ -21,18 +21,11 @@ router.post('/registPrescription', function(req,res) {
             doctorID: req.body.doctorID
         }
 
-        console.log(Presc)
-
         Prescription.inserir(Presc)
             .then(dados => res.json(Presc))
             .catch(e => res.json(e))
     }
 })
 
-router.post('/registEntry', function(req,res) {
-        Prescription.addMed(req.body.id, req.body.entryMed)
-            .then(dados => res.json(Presc))
-            .catch(e => res.json(e))
-})
 
 module.exports = router;
