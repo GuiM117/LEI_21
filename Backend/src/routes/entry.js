@@ -12,6 +12,16 @@ router.get('/listEntry', (req,res) => {
         .catch(e => res.json(e))
 })
 
+
+/* GET prescriptions por id da presc */
+router.get('/:id', function(req, res) {
+    var id = req.params.id
+    //console.log(id);
+    Entry.consultar(id)
+        .then(dados => res.json(dados))
+        .catch(e => res.json(e))
+})
+
 /* POST a new Entry */
 router.post('/registEntry', function(req,res) {
     if(req.body.name != ""){

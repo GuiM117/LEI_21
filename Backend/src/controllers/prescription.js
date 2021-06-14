@@ -12,6 +12,14 @@ module.exports.consultar = id => {
         .findOne({_id: id})
         .exec()
 }
+
+//Consulta um Prescription especifico por id do Med
+module.exports.consultarIDMed = id => {
+    return Prescription
+        .findOne({doctorID: id})
+        .exec()
+}
+
 //Insere um Prescription
 module.exports.inserir = p => {
     let newPatient = new Prescription(p)

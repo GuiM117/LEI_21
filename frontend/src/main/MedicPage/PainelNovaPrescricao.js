@@ -10,27 +10,39 @@ const axios = require('axios')
 
 const patient = {
   name:"",
-  patientNumber:-1,
+  patientNumber:-2,
   sex:"",
   birth_date:"",
   episode_number:0
 
 }
 
-const initialState = {
-  entries: [],
-  patientsList: [],
-  patientInfo : {...patient}
-}
-
 export default class PainelNovaPrescricao extends React.Component {
 
-  state = { ...initialState  }
+  state = {
+    from_users: 0,
+    entries: [],
+    patientsList: [],
+    patientInfo : {
+      name:this.props.name,
+      patientNumber:this.props.id,
+      sex:"",
+      birth_date:"",
+      episode_number:0
+    }
+  }
 
   componentWillMount() {
     axios("http://localhost:4800/patients/listPatients").then(resp => {
+      if(this.state.patientInfo.name !== undefined){
+        console.log("VEM NOME NO LINK")
+        this.setState({from_users: 1}, () => {
+          console.log(this.state)
+        })
+      }
       this.setState({patientsList: resp.data}, () => {
         console.log(this.state)
+        console.log(this.props)
       })
     })
   }
@@ -97,43 +109,62 @@ export default class PainelNovaPrescricao extends React.Component {
         <Typography variant="h6" gutterBottom>
           Medicação
         </Typography>
+        {this.state.from_users !== 0 ?
         <Grid container spacing={3}>
-          <Grid item  xs={12} sm={4}>
-            <TextField
-                id="outlined-basic"
-                label="Nº de Utente"
-                variant="outlined"
-                style={{width: 370}}
-                value={this.state.patientInfo.patientNumber}
-                onChange={(event,value)=> this.handleSelectedPatientNumber(value)}
-            />
-          </Grid>
+        <Grid item  xs={12} sm={4}>
 
-          <Grid item  xs={12} sm={8}>
-            <Autocomplete
-              id="lastName"
-              options = {this.state.patientsList}
-              getOptionLabel={(option) => option.name}
-              style={{ width: 758 }}
-              renderInput={(params) => <TextField {...params} label="Nome Paciente" variant="outlined" />}
-              onChange={ (event,value) => this.handleSelectedName(value)}
-            />
-          </Grid>
-          
-          <EntryInput sendData={this.handleEntries} />
-
-         {/* <Grid item xs={12} sm={4}>
-            <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={this.addEntry}
-                  className="botao2"
-                >Novo Medicamento
-            </Button>
-
-          </Grid>*/}
-
+          <TextField
+            id="outlined-basic"
+            label="Nº de Utente"
+            defaultValue={this.state.patientInfo.patientNumber}
+            style={{width: 370}}
+            InputProps={{
+              readOnly: true,
+            }}
+            variant="outlined"
+          />
         </Grid>
+            
+        <Grid item  xs={12} sm={8}>
+          <TextField
+              id="lastName"
+              label="Nome Paciente"
+              defaultValue={this.state.patientInfo.name}
+              style={{ width: 758 }} 
+              InputProps={{
+                readOnly: true,
+              }}
+              variant="outlined"
+            />
+        </Grid>
+        <EntryInput sendData={this.handleEntries} />
+        </Grid>
+        :
+        <Grid container spacing={3}>
+            <Grid item  xs={12} sm={4}>
+              <TextField
+                  id="outlined-basic"
+                  label="Nº de Utente"
+                  variant="outlined"
+                  style={{width: 370}}
+                  value={this.state.patientInfo.patientNumber}
+                  onChange={(event,value)=> this.handleSelectedPatientNumber(value)}
+              />
+            </Grid>
+
+            <Grid item  xs={12} sm={8}>
+              <Autocomplete
+                id="lastName"
+                options = {this.state.patientsList}
+                getOptionLabel={(option) => option.name}
+                style={{ width: 758 }} 
+                renderInput={(params) => <TextField {...params} defaultValue={this.state.patientInfo.name} label="Nome Paciente" variant="outlined" />}
+                onChange={ (event,value) => this.handleSelectedName(value)}
+              />
+            </Grid>
+            <EntryInput sendData={this.handleEntries} />
+          </Grid>
+        }
       </React.Fragment>
   );
   }

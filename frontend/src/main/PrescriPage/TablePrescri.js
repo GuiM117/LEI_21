@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 
+const axios = require('axios');
 
 
 const useRowStyles = makeStyles({
@@ -27,10 +28,21 @@ const useRowStyles = makeStyles({
     },
   });
 
-function Row(props) {
+
+  function RowAlt(props) {
     const { row } = props;
+    const { users } = props;
+    console.log(props);
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
+  
+    var userName = [];
+    
+    for (let [key, value] of users.entries()) {
+      if (value.patientNumber === row.patientNumber)
+        userName = value.name;
+    }
+    console.log(userName);
   
     return (
       <React.Fragment>
@@ -43,14 +55,14 @@ function Row(props) {
           <TableCell component="th" scope="row">
             {row.patientNumber}
           </TableCell>
-          <TableCell>{row.name}</TableCell>
+          <TableCell>{userName}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box margin={1}>
                 <Typography variant="h6" gutterBottom component="div">
-                  History
+                  Detalhes Receita
                 </Typography>
                 <Table size="small" aria-label="purchases">
                   <TableHead>
@@ -58,11 +70,11 @@ function Row(props) {
                       <TableCell>Data Inicio</TableCell>
                       <TableCell>Data Fim</TableCell>
                       <TableCell>Medicamento</TableCell>
-                      <TableCell align="right">Amount</TableCell>
+                      <TableCell align="right">chnm</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {row.entrys.map((historyRow) => (
+                    {row.entryID.map((historyRow) => (
                       <TableRow key={historyRow.date}>
                         <TableCell component="th" scope="row">
                           {historyRow.initDate}
@@ -71,7 +83,7 @@ function Row(props) {
                           {historyRow.endDate}
                         </TableCell>
                         <TableCell>{historyRow.description}</TableCell>
-                        <TableCell align="right">{historyRow.dosagePerDay}</TableCell>
+                        <TableCell align="right">{historyRow.chnm}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -82,76 +94,116 @@ function Row(props) {
         </TableRow>
       </React.Fragment>
     );
-}
-
-Row.propTypes = {
-    row: PropTypes.shape({
-        patientNumber: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      history: PropTypes.arrayOf(
-        PropTypes.shape({
-          amount: PropTypes.number.isRequired,
-          customerId: PropTypes.string.isRequired,
-          date: PropTypes.string.isRequired,
-        }),
-      ).isRequired,
-    }).isRequired,
-  };
-
-function createData(patientNumber, name) {
-    return {
-      patientNumber,
-      name,
-      entrys: [
-        { initDate: '2020-01-05', endDate: '2021-01-05', description: 'Nome do Medicamento ou Assim', dosagePerDay: 3 },
-        { initDate: '2020-01-02', endDate: '2021-01-05', description: 'Nome do Medicamento ou Subs Ativa', dosagePerDay: 1 },
-      ],
-    };
   }
 
+
 const initialState = {
-    rows: [
-        createData(1, 'Zacarias Antonio'),
-        createData(2, 'Pinto da Costa'),
-        createData(3, 'Jose Machado'),
-        createData(4, 'Cupcake de Morango'),
-    ]
+    prescList: [],
+    prescListAux: [],
+    userList: [],
+    acabou: false,
+    entryInd: []
 }
+
 
 export default class TablePrescri extends React.Component {
     
     state = { ...initialState  }
 
-    render(){
-        return (
-            <React.Fragment>
-                <Typography component="h2" variant="h6" color="primary" gutterBottom>
-                    Lista de Prescrições
-                </Typography>
-                
-                <TableContainer component={Paper}>
-                    <Table aria-label="collapsible table">
-                    <colgroup>
-                        <col style={{width:'10%'}}/>
-                        <col style={{width:'20%'}}/>
-                        <col style={{width:'70%'}}/>
-                    </colgroup>
-                        <TableHead>
-                        <TableRow>
-                            <TableCell />
-                            <TableCell align="left">Número de Paciente</TableCell>
-                            <TableCell>Nome</TableCell>
-                        </TableRow>
-                        </TableHead>
-                        <TableBody>
-                        {this.state.rows.map((row) => (
-                            <Row key={row.name} row={row} />
-                        ))}
-                        </TableBody>
-                    </Table>
-                    </TableContainer>
-            </React.Fragment>
-        );
+    componentDidMount() {
+
+      axios("http://localhost:4800/patients/listPatients").then(respond => {
+        respond.data.forEach(element => {
+          //console.log(element)
+          this.state.userList = this.state.entryInd.concat(respond.data);
+        })
+      })
+
+      axios("http://localhost:4800/prescriptions/listPrescriptions").then(resp => {
+        //this.setState({prescList: resp.data}, () => {
+          //console.log(this.state.prescList)
+          //console.log(resp)
+          //console.log(this.state);
+          resp.data.forEach(element => {
+            //console.log("elemento prescList:")
+            //console.log(element);
+            // para cada elemento EntryID:
+            var tamAt = 0;
+            element.entryID.forEach(elementoEntry => {
+              const tamMax = element.entryID.length;
+              //console.log("elemento Entry:");
+
+              axios("http://localhost:4800/entry/"+elementoEntry).then(response => {
+                tamAt++;
+                this.state.entryInd = this.state.entryInd.concat(response.data);
+                //console.log(response.data);
+                //console.log(this.state.entryInd);
+                this.setState({
+                  prescListAux: {
+                    doctorID: element.doctorID,
+                    patientNumber: element.patientNumber,
+                    entryID: this.state.entryInd
+                  }
+                })
+                if(tamAt == tamMax){
+                  //console.log(tamAt)
+                  //console.log(tamMax)
+                  //console.log("AQUI")
+                  this.setState({
+                    ...this.state,
+                      prescList: this.state.prescList.concat(this.state.prescListAux),
+                      entryInd : []
+                    
+                  })
+                  //this.state.prescList = this.state.prescList.concat(this.state.prescListAux);
+                  //this.state.entryInd = [];
+                  //this.state.acabou = true;
+                  
+                }
+                console.log(this.state);
+
+              })
+              //console.log(tamAt);
+              //console.log(this.state.prescList)
+            })
+            
+          });
+          
+        //})
+      })
     }
+    
+    render(){
+      return (
+          <React.Fragment>
+              <Typography component="h2" variant="h6" color="primary" gutterBottom>
+                  Lista de Prescrições
+              </Typography>
+              
+              <TableContainer component={Paper}>
+                  <Table aria-label="collapsible table">
+                  <colgroup>
+                      <col style={{width:'10%'}}/>
+                      <col style={{width:'20%'}}/>
+                      <col style={{width:'70%'}}/>
+                  </colgroup>
+                      <TableHead>
+                      <TableRow>
+                          <TableCell />
+                          <TableCell align="left">Número de Paciente</TableCell>
+                          <TableCell>Nome</TableCell>
+                      </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        
+                      { this.state.prescList.map((row) => (
+                          <RowAlt key={row.name} row={row} users={this.state.userList} />
+                      ))}
+                      </TableBody>
+                  </Table>
+                  </TableContainer>
+          </React.Fragment>
+      );
+  }
     
 }

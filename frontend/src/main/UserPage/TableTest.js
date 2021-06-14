@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableContainer from '@material-ui/core/TableContainer';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 
 
 
@@ -35,14 +36,19 @@ export default class TableTest extends React.Component {
   }
   //classes = useStyles();
 
-  requestSearch = (searchedVal) => {
-    if(searchedVal === ""){
-        this.setState({patientsList: this.state.patientsListFull })
+  handleClick(row)
+  {
+         console.log('Row clicked : ' + row);
+  }
 
+  
+  requestSearch = (searchedVal) => {
+    if(searchedVal == ""){ 
+        this.state.patientsList = this.state.patientsListFull;
     }
     
     const filteredRows = this.state.patientsList.filter((row) => {
-        return row.name.toLowerCase().includes(searchedVal.toLowerCase());
+        return row.name.toLowerCase().startsWith(searchedVal.toLowerCase());
     });
     this.setState({
         patientsList: filteredRows
@@ -50,12 +56,12 @@ export default class TableTest extends React.Component {
     //console.log(filteredRows);
   };
 
+
   cancelSearch = () => {
     this.setState({
         searched: ""
       });
-    this.setState({patientsList:this.state.patientsListFull })
-
+    this.state.patientsList = this.state.patientsListFull;
     this.requestSearch(this.state.searched);
 };
 
@@ -81,17 +87,15 @@ export default class TableTest extends React.Component {
                         <TableCell>Nome</TableCell>
                         <TableCell>Sexo</TableCell>
                         <TableCell>Data-Nascimento</TableCell>
-                        <TableCell align="right">Exemplo</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
                     {this.state.patientsList.map((row) => (
-                        <TableRow key={row._id}>
+                        <TableRow component={Link} href={'/medic/' + row.name + '/' + row.patientNumber} key={row._id} onClick={() => this.handleClick(row.patientNumber)}>
                         <TableCell>{row.patientNumber}</TableCell>
                         <TableCell>{row.name}</TableCell>
                         <TableCell>{row.sex}</TableCell>
                         <TableCell>{row.birth_date}</TableCell>
-                        <TableCell align="right">1</TableCell>
                         </TableRow>
                     ))}
                     </TableBody>

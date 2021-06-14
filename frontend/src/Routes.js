@@ -8,7 +8,7 @@ import PrescriPage from './main/PrescriPage/PrescriPage';
 
 const Routes = () => (
         <Switch>
-            <Route path='/medic' component={MedicPage} />
+            <Route path='/medic/:name?/:id?' component={MedicPage} />
             <Route path='/medic_users' component={UserPage} />
             <Route path='/prescriptions' component={PrescriPage} />
             <Route exact path='/' component={LandPage} />

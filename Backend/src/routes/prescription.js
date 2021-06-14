@@ -12,6 +12,16 @@ router.get('/listPrescriptions', (req,res) => {
         .catch(e => res.json(e))
 })
 
+
+/* GET prescriptions por id do medico */
+router.get('/:id', function(req, res) {
+    var id = req.params.id
+    console.log(id);
+    Prescription.consultarIDMed(id)
+        .then(dados => res.json(dados), console.log(res))
+        .catch(e => res.json(e))
+})
+
 /* POST a new Prescription */
 router.post('/registPrescription', function(req,res) {
     if(req.body.name != ""){
