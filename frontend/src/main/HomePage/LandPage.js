@@ -2,7 +2,7 @@ import '../../styles/LandPage.css'
 import NavBar from '../../components/NavBar'
 import Login from '../../components/Login'
 import React from "react"
-import loginImg from "../../assets/images/loginImg.png"
+import loginImg from "../../assets/images/loginImg.jpg"
 
 const LandPage = () => {
   return (

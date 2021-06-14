@@ -7,6 +7,7 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import AppBar from '@material-ui/core/AppBar';
@@ -32,21 +33,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'flex-end',
     padding: '0 8px',
     ...theme.mixins.toolbar,
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   },
   menuButton: {
     marginRight: 36,
@@ -74,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     }),
     width: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9),
+      width: theme.spacing(8),
     },
   },
   appBarSpacer: theme.mixins.toolbar,
@@ -112,21 +98,7 @@ export default function MenuAdmin({title}){
 
     return(
         <>
-        <CssBaseline />
-        <AppBar style={{ background: '#FFFFFF' }} position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-            <Toolbar className={classes.toolbar}>
-            <IconButton
-                edge="start"
-                color="primary"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-            >
-                <MenuIcon />
-            </IconButton>
-            
-            </Toolbar>
-        </AppBar>
+        <CssBaseline/>
         <Drawer
         variant="permanent"
         classes={{
@@ -136,14 +108,21 @@ export default function MenuAdmin({title}){
         >
             <div className="logoDashboard">
               <img src={logoSistema} alt="Logo sistema" className="logoDashboard" />
-            <IconButton onClick={handleDrawerClose}>
-                <ChevronLeftIcon />
-            </IconButton>
             </div>
             <Divider />
             <List>{mainListItems}</List>
             <Divider />
             <List>{secondaryListItems}</List>
+            { open  ?
+                <IconButton onClick={handleDrawerClose}>
+                    <ChevronLeftIcon />
+                </IconButton>
+                :
+                <IconButton onClick={handleDrawerOpen}>
+                    <ChevronRightIcon />
+                </IconButton>
+                }
+
         </Drawer>
         
       </>

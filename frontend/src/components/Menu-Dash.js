@@ -3,8 +3,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AddIcon from '@material-ui/icons/Add';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import PeopleIcon from '@material-ui/icons/People';
 
 import ExitToApp from '@material-ui/icons/ExitToApp';
@@ -13,7 +13,7 @@ export const mainListItems = (
   <div>
     <ListItem button component="a" href="/medic">
       <ListItemIcon>
-        <DashboardIcon />
+        <AddIcon />
       </ListItemIcon>
       <ListItemText primary="Nova Prescrição" />
     </ListItem>
@@ -25,7 +25,7 @@ export const mainListItems = (
     </ListItem>
     <ListItem button component="a" href="/prescriptions" >
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <FormatListBulletedIcon/>
       </ListItemIcon>
       <ListItemText primary="Prescrições" />
     </ListItem>
