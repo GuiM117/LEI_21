@@ -1,4 +1,4 @@
-.logoIMG {
+.loginForm{
     position: absolute;
     left: 20px;
     top: 20px;
@@ -8,17 +8,16 @@
 
 .loginTitle {
     position: absolute;
-    width: 111px;
+    width: 150px;
     height: 56px;
-    left: 40px;
-    top: 150px;
+    left: 260px;
+    top: -200px;
 
     font-family: Poppins;
     font-style: normal;
     font-weight: 500;
     font-size: 37px;
     line-height: 55px;
-    /* identical to box height */
 
 
     color: #454545;
@@ -28,8 +27,8 @@
     position: absolute;
     width: 513px;
     height: 34px;
-    left: 40px;
-    top: 215px;
+    left: 70px;
+    top: -100px;
 
     font-family: Poppins;
     font-style: normal;
@@ -52,10 +51,8 @@ form-group.label {
     font-family: Poppins;
 }
 
-input {
-    border-top: 100px;
-    border-right: 100px;
-    border-left: 100px;
+.input {
+    left: 150px;
     width: 60%;
 }
 .login2 {
@@ -85,4 +82,9 @@ input {
     background: linear-gradient(268.92deg, #52DC89 0%, #1A964C 100%);
     box-shadow: 0px 11px 20px rgba(52, 177, 102, 0.57);
     border-radius: 8px;
+}
+
+.loginB{
+    position: absolute;
+    left: 270px;
 }

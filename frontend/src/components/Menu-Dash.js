@@ -11,11 +11,11 @@ import ExitToApp from '@material-ui/icons/ExitToApp';
 
 export const mainListItems = (
   <div>
-    <ListItem button component="a" href="/main">
+    <ListItem button component="a" href="/medic">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="Nova Prescrição" />
     </ListItem>
     <ListItem button component="a" href="/medic_users" >
       <ListItemIcon>
@@ -34,8 +34,8 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Opções</ListSubheader>
-    <ListItem button onClick={confirmSair}>
+    {/*<ListSubheader inset>Opções</ListSubheader>*/}
+    <ListItem button component="a" href="/" >
       <ListItemIcon>
         <ExitToApp />
       </ListItemIcon>
