@@ -6,15 +6,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import Typography from '@material-ui/core/Typography';
-
-
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
 import axios from "axios";
 import PainelNovaPrescricao from './PainelNovaPrescricao';
 import Review from './Review';
@@ -138,15 +135,10 @@ const useStyles2 = makeStyles((theme) => ({
   },
 }));
 
-
 const steps = ['Escolha Medicamentos', 'Revisão Prescrição'];
 
 
 
-const prescription = {
-  patientInfo: {},
-  entries : []
-}
 
 const MedicPage = (props) => {
 
@@ -155,7 +147,7 @@ const MedicPage = (props) => {
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [prescription,setPrescription] = React.useState({entries:[],patientInfo:{}})
-  const doctorID = props.location.state.id
+  const doctorID = window.$name
 
 
   const handleChange = (value) => {
@@ -165,7 +157,7 @@ const MedicPage = (props) => {
       patientInfo: {...value.patientInfo}
     }
     setPrescription(precriptionAux)
-    console.log("Entries MedicPage", prescription)
+    //console.log("Entries MedicPage", prescription)
   }
 
   function getStepContent(step) {
@@ -210,9 +202,7 @@ const MedicPage = (props) => {
     }
   };
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
-  };
+
 
   return (
 
@@ -252,11 +242,11 @@ const MedicPage = (props) => {
                   <React.Fragment>
                     {getStepContent(activeStep)}
                     <div className={classes2.buttons}>
-                      {activeStep !== 0 && (
+                      {/*{activeStep !== 0 && (
                         <Button onClick={handleBack} className={classes2.button}>
                           Anterior
                         </Button>
-                      )}
+                      )}*/}
                       <Button
                         variant="contained"
                         color="primary"

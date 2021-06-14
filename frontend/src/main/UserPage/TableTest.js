@@ -1,7 +1,4 @@
-
-//import MenuAdmin from '../../components/Dashboard'
-
-import React, { useState , useEffect } from 'react';
+import React from 'react';
 import SearchBar from "material-ui-search-bar";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,19 +6,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableContainer from '@material-ui/core/TableContainer';
-
 import Typography from '@material-ui/core/Typography';
 
-import { makeStyles } from '@material-ui/core/styles';
-//import { SystemUpdate } from '@material-ui/icons';
+
 
 const axios = require('axios');
 
-const useStyles = makeStyles((theme) => ({
-    seeMore: {
-      marginTop: theme.spacing(3),
-    },
-  }));
+
 
 
 const initialState = {
@@ -45,8 +36,9 @@ export default class TableTest extends React.Component {
   //classes = useStyles();
 
   requestSearch = (searchedVal) => {
-    if(searchedVal == ""){ 
-        this.state.patientsList = this.state.patientsListFull;
+    if(searchedVal === ""){
+        this.setState({patientsList: this.state.patientsListFull })
+
     }
     
     const filteredRows = this.state.patientsList.filter((row) => {
@@ -62,7 +54,8 @@ export default class TableTest extends React.Component {
     this.setState({
         searched: ""
       });
-    this.state.patientsList = this.state.patientsListFull;
+    this.setState({patientsList:this.state.patientsListFull })
+
     this.requestSearch(this.state.searched);
 };
 

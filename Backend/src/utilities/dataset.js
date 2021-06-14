@@ -59,9 +59,9 @@ const readerTabMestreDCI =
         .pipe(csv({separator:";"}))
         .on('data', async(row) => {
             //console.log(JSON.stringify(row));
-            var entries = Object.values(row);
+            let entries = Object.values(row);
 
-            if (entries[0]=="DCI") {
+            if (entries[0]==="DCI") {
                 let DCI = {
                     _id: entries[1],
                     description: entries[2]
@@ -83,9 +83,9 @@ const readerTabMestrePharmForm =
         .pipe(csv({separator:";"}))
         .on('data', async(row) => {
             //console.log(JSON.stringify(row));
-            var entries = Object.values(row);
+            let entries = Object.values(row);
 
-            if (entries[0]=="FORMA_FARM"){
+            if (entries[0]==="FORMA_FARM"){
                 let PharmForm = {
                     _id: entries[1],
                     description: entries[2]
@@ -107,9 +107,9 @@ const readerTabMestreUnitMed =
     fs.createReadStream(dataPathTabMestre)
         .pipe(csv({separator:";"}))
         .on('data', async(row) => {
-            var entries = Object.values(row);
+            let entries = Object.values(row);
 
-            if (entries[0]=="UNID_MED"){
+            if (entries[0]==="UNID_MED"){
                 let unitMed = {
                     _id: entries[1],
                     description: entries[2]
@@ -131,9 +131,9 @@ const readerTabMestreViaAdmin =
     fs.createReadStream(dataPathTabMestre)
         .pipe(csv({separator:";"}))
         .on('data', async(row) => {
-            var entries = Object.values(row);
+            let entries = Object.values(row);
 
-            if (entries[0]=="VIA_ADM"){
+            if (entries[0]==="VIA_ADM"){
                 let viaAdm = {
                     _id: entries[1],
                     description: entries[2]
@@ -156,7 +156,7 @@ const readerInteracoes =
         .pipe(csv({separator:";"}))
         .on('data', async(row) => {
             //console.log(JSON.stringify(row));
-            var entries = Object.values(row);
+            let entries = Object.values(row);
 
             let inter = {
                 chnm1: entries[1],

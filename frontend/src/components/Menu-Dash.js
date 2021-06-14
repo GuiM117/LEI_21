@@ -2,7 +2,6 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import AddIcon from '@material-ui/icons/Add';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import PeopleIcon from '@material-ui/icons/People';
@@ -43,7 +42,3 @@ export const secondaryListItems = (
     </ListItem>
   </div>
 );
-
-async function confirmSair(){
-  console.log("confirmar sair");
-}

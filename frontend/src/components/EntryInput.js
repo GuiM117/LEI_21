@@ -175,13 +175,14 @@ class EntryInput extends React.Component {
                 axios.get(`http://localhost:4800/interactions/interaction?chnms=${chnms}`)
                     .then(dados => {
                         let alerts = dados.data
-                        alerts.map(aler => {
+
+                        for (let i= 0; i<alerts.length;i++ ){
                             this.props.enqueueSnackbar("Interação entre Medicamentos Perigosa", {
                                 variant: 'warning',
                                 autoHideDuration: 3000,
                                 action: key => (
                                     <React.Fragment>
-                                        <Button onClick={() => { alert(` ${aler.description}`); }}>
+                                        <Button onClick={() => { alert(` ${alerts[i].description}`); }}>
                                             Alert
                                         </Button>
                                         <Button onClick={() => { this.props.closeSnackbar(key) }}>
@@ -190,7 +191,7 @@ class EntryInput extends React.Component {
                                     </React.Fragment>
                                 ),
                             });
-                        })
+                        }
                         console.log(dados)
                     })
                     .catch(err => console.log)

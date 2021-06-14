@@ -1,8 +1,7 @@
 //import MenuAdmin from '../../components/Dashboard'
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
-import React, { useState , useEffect } from 'react';
-//import SearchBar from "material-ui-search-bar";
+import React from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,25 +10,16 @@ import TableRow from '@material-ui/core/TableRow';
 import TableContainer from '@material-ui/core/TableContainer';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-
 import { makeStyles } from '@material-ui/core/styles';
-//import { SystemUpdate } from '@material-ui/icons';
-
-const axios = require('axios');
-
-const useStyles = makeStyles((theme) => ({
-    seeMore: {
-      marginTop: theme.spacing(3),
-    },
-  }));
 
 
-  const useRowStyles = makeStyles({
+
+
+const useRowStyles = makeStyles({
     root: {
       '& > *': {
         borderBottom: 'unset',
@@ -108,8 +98,7 @@ Row.propTypes = {
     }).isRequired,
   };
 
-
-  function createData(patientNumber, name) {
+function createData(patientNumber, name) {
     return {
       patientNumber,
       name,
@@ -119,7 +108,6 @@ Row.propTypes = {
       ],
     };
   }
-  
 
 const initialState = {
     rows: [

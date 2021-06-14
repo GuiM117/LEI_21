@@ -20,12 +20,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Review(props) {
-    
-  const entries = [
-    { name: 'Amidotrizoato de meglumina 660 mg/mL + amidotrizoato de sódio 100 mg/mL', dateInicio: '01-06-2022', dateFim: '10-06-2021', desc: '1 comprimido ao jantar' },
-    { name: 'Bupivacaína 2.5 mg/mL', dateInicio: '01-06-2021', dateFim: '08-07-2022', desc: 'Aplicar 1 vez por dia' },
-    { name: 'Metilprednisolona 40 mg/mL', dateInicio: '01-06-2021', dateFim: '11-06-2021', desc: 'Tomar 1 cápsula de 12 em 12 horas'},
-  ];
 
   const patientInfo = [
     { name: 'Numero Utente', detail: props.prescription.patientInfo.patientNumber },
@@ -34,8 +28,6 @@ export default function Review(props) {
     { name: 'Sexo', detail: props.prescription.patientInfo.sex },
     {name: "Número de Episódio", detail: props.prescription.patientInfo.episode_number}
   ];
-
-  console.log("Props Review", props.prescription.entries)
 
   const classes = useStyles();
 

@@ -5,14 +5,10 @@ import { mainListItems, secondaryListItems } from './Menu-Dash.js';
 import clsx from 'clsx';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import logoSistema from '../assets/images/logo2.png';
 
 import '../styles/Dashboard.css'
@@ -98,7 +94,6 @@ export default function MenuAdmin({title}){
 
     return(
         <>
-        <CssBaseline/>
         <Drawer
         variant="permanent"
         classes={{

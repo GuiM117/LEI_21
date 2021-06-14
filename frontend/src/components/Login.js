@@ -43,10 +43,8 @@ class Login extends Component {
                         vertical: 'bottom',
                         horizontal: 'center',
                     });
-                    this.props.history.push({
-                        pathname: '/medic',
-                        state: {id: dados.data.id }
-                    })
+                    window.$name = dados.data.id
+                    this.props.history.push("/medic")
                 }else{
                     this.props.enqueueSnackbar("Password e/ou email incorretos. Tente novamente", {
                         variant: 'error',
@@ -59,7 +57,7 @@ class Login extends Component {
     }
 
     render() {
-        const { formData, submitted, isValid } = this.state;
+        const { formData, submitted } = this.state;
         return (
             <ValidatorForm
                 ref="form"

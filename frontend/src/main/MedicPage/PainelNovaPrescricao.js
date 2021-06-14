@@ -91,7 +91,7 @@ export default class PainelNovaPrescricao extends React.Component {
   }
 
   render(){
-    let {entries} = this.state
+
     return (
       <React.Fragment>
         <Typography variant="h6" gutterBottom>
