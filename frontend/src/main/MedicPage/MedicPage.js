@@ -148,7 +148,7 @@ const MedicPage = (props) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [prescription,setPrescription] = React.useState({entries:[],patientInfo:{}})
   const doctorID = window.$name
-  console.log(doctorID);
+  //console.log(doctorID);
 
   const handleChange = (value) => {
     console.log("Entries",value.entries)
