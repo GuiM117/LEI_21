@@ -5,6 +5,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
+import moment from 'moment';
+import 'moment/locale/pt'
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +27,7 @@ export default function Review(props) {
   const patientInfo = [
     { name: 'Numero Utente', detail: props.prescription.patientInfo.patientNumber },
     { name: 'Nome', detail: props.prescription.patientInfo.name },
-    { name: 'Data de Nascimento', detail: props.prescription.patientInfo.birth_date },
+    { name: 'Data de Nascimento', detail: moment(props.prescription.patientInfo.birth_date).format("dddd, DD MMM YYYY") },
     { name: 'Sexo', detail: props.prescription.patientInfo.sex },
     {name: "Número de Episódio", detail: props.prescription.patientInfo.episode_number}
   ];
@@ -40,7 +43,7 @@ export default function Review(props) {
         {props.prescription.entries.map((ent) => (
           <ListItem className={classes.listItem} key={ent.name}>
             <ListItemText primary={ent.name+' '} secondary={ent.entry.description} />
-            <Typography variant="body2">{ent.entry.initDate+' - '+ent.entry.endDate}</Typography>
+            <Typography variant="body2">{moment(ent.entry.initDate).format("dddd, DD MMM YYYY") +' - ' + moment(ent.entry.endDate).format("dddd, DD MMM YYYY")}</Typography>
           </ListItem>
         ))}
         

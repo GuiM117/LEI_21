@@ -8,9 +8,9 @@ import PrescriPage from './main/PrescriPage/PrescriPage';
 
 const Routes = () => (
         <Switch>
-            <Route path='/medic/:name?/:id?' component={MedicPage} />
-            <Route path='/medic_users' component={UserPage} />
-            <Route path='/prescriptions' component={PrescriPage} />
+            <Route path='/medic/:docID/:name?/:id?/:sex?/:date?' component={MedicPage} />
+            <Route path='/medic_users/:docID' component={UserPage} />
+            <Route path='/prescriptions/:docID' component={PrescriPage} />
             <Route exact path='/' component={LandPage} />
         </Switch>
 );

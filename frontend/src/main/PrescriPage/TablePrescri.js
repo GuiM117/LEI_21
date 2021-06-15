@@ -15,7 +15,8 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-
+import moment from 'moment';
+import 'moment/locale/pt'
 
 const axios = require('axios');
 
@@ -42,7 +43,7 @@ const useRowStyles = makeStyles({
       if (value.patientNumber === row.patientNumber)
         userName = value.name;
     }
-    console.log(userName);
+    //console.log(userName);
   
     return (
       <React.Fragment>
@@ -69,21 +70,19 @@ const useRowStyles = makeStyles({
                     <TableRow>
                       <TableCell>Data Inicio</TableCell>
                       <TableCell>Data Fim</TableCell>
-                      <TableCell>Medicamento</TableCell>
-                      <TableCell align="right">chnm</TableCell>
+                      <TableCell>Posologia</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {row.entryID.map((historyRow) => (
                       <TableRow key={historyRow.date}>
                         <TableCell component="th" scope="row">
-                          {historyRow.initDate}
+                          {moment(historyRow.initDate).locale('pt').format("dddd, DD MMM YYYY")}
                         </TableCell>
                         <TableCell component="th" scope="row">
-                          {historyRow.endDate}
+                          {moment(historyRow.endDate).format("dddd, DD MMM YYYY")}
                         </TableCell>
                         <TableCell>{historyRow.description}</TableCell>
-                        <TableCell align="right">{historyRow.chnm}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -112,6 +111,7 @@ export default class TablePrescri extends React.Component {
 
     componentDidMount() {
 
+      console.log(this.props);
       axios("http://localhost:4800/patients/listPatients").then(respond => {
         respond.data.forEach(element => {
           //console.log(element)
@@ -119,10 +119,10 @@ export default class TablePrescri extends React.Component {
         })
       })
 
-      axios("http://localhost:4800/prescriptions/listPrescriptions").then(resp => {
+      axios("http://localhost:4800/prescriptions/"+this.props.doctorID).then(resp => {
         //this.setState({prescList: resp.data}, () => {
           //console.log(this.state.prescList)
-          //console.log(resp)
+          console.log(resp)
           //console.log(this.state);
           resp.data.forEach(element => {
             //console.log("elemento prescList:")
@@ -174,6 +174,7 @@ export default class TablePrescri extends React.Component {
     }
     
     render(){
+      console.log(this.props);
       return (
           <React.Fragment>
               <Typography component="h2" variant="h6" color="primary" gutterBottom>
