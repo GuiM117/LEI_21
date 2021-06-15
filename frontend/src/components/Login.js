@@ -44,7 +44,7 @@ class Login extends Component {
                         horizontal: 'center',
                     });
                     window.$name = dados.data.id
-                    this.props.history.push("/medic")
+                    this.props.history.push("/medic/"+dados.data.id)
                 }else{
                     this.props.enqueueSnackbar("Password e/ou email incorretos. Tente novamente", {
                         variant: 'error',

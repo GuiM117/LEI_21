@@ -2,6 +2,8 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { mainListItems, secondaryListItems } from './Menu-Dash.js';
+import MainList from './MainList.js';
+import SecondList from './SecondList.js';
 import clsx from 'clsx';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -80,7 +82,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuAdmin({title}){
+export default function MenuAdmin(props){
+  
+    const doctorID = props.doctorID
+    //console.log(doctorID);
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(true);
@@ -105,9 +110,9 @@ export default function MenuAdmin({title}){
               <img src={logoSistema} alt="Logo sistema" className="logoDashboard" />
             </div>
             <Divider />
-            <List>{mainListItems}</List>
+            <List><MainList doctorID={doctorID}/></List>
             <Divider />
-            <List>{secondaryListItems}</List>
+            <List><SecondList/></List>
             { open  ?
                 <IconButton onClick={handleDrawerClose}>
                     <ChevronLeftIcon />

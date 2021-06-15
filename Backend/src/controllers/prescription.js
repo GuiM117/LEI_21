@@ -16,7 +16,7 @@ module.exports.consultar = id => {
 //Consulta um Prescription especifico por id do Med
 module.exports.consultarIDMed = id => {
     return Prescription
-        .findOne({doctorID: id})
+        .find({doctorID: id})
         .exec()
 }
 

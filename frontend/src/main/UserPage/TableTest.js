@@ -8,27 +8,26 @@ import TableRow from '@material-ui/core/TableRow';
 import TableContainer from '@material-ui/core/TableContainer';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import moment from 'moment';
+import 'moment/locale/pt'
 
 
 
 const axios = require('axios');
 
-
-
-
-const initialState = {
+export default class TableTest extends React.Component {
+    
+  state = { 
     searched: "",
     patientsList: [],
     patientsListFull: []
-}
-
-export default class TableTest extends React.Component {
-    
-    state = { ...initialState  }
+  }
 
   componentWillMount() {
     axios("http://localhost:4800/patients/listPatients").then(resp => {
       this.setState({patientsList: resp.data, patientsListFull: resp.data}, () => {
+        console.log(this.props)
+        console.log(this.state)
         //console.log(this.state.patientsListFull)
         //console.log(this.state.patientsList)
       })
@@ -43,7 +42,7 @@ export default class TableTest extends React.Component {
 
   
   requestSearch = (searchedVal) => {
-    if(searchedVal == ""){ 
+    if(searchedVal === ""){ 
         this.state.patientsList = this.state.patientsListFull;
     }
     
@@ -91,11 +90,12 @@ export default class TableTest extends React.Component {
                     </TableHead>
                     <TableBody>
                     {this.state.patientsList.map((row) => (
-                        <TableRow component={Link} href={'/medic/' + row.name + '/' + row.patientNumber} key={row._id} onClick={() => this.handleClick(row.patientNumber)}>
+                        <TableRow component={Link} href={'/medic/'+ this.props.doctorID +'/' + row.name + '/' + row.patientNumber + '/' + row.sex + '/' + row.birth_date} key={row._id} onClick={() => this.handleClick(row.patientNumber)}>
                         <TableCell>{row.patientNumber}</TableCell>
                         <TableCell>{row.name}</TableCell>
                         <TableCell>{row.sex}</TableCell>
-                        <TableCell>{row.birth_date}</TableCell>
+                        <TableCell>
+                          {moment(row.birth_date).format("dddd, DD MMM YYYY")}</TableCell>
                         </TableRow>
                     ))}
                     </TableBody>

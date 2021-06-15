@@ -147,7 +147,8 @@ const MedicPage = (props) => {
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [prescription,setPrescription] = React.useState({entries:[],patientInfo:{}})
-  const doctorID = window.$name
+  const doctorID = props.match.params.docID;
+  //console.log(props);
   console.log(doctorID);
 
   const handleChange = (value) => {
@@ -165,7 +166,7 @@ const MedicPage = (props) => {
     switch (step) {
       case 0:
         return <React.Fragment>
-          <PainelNovaPrescricao sendData={handleChange} id={props.match.params.id} name={props.match.params.name}/>
+          <PainelNovaPrescricao sendData={handleChange} id={props.match.params.id} name={props.match.params.name} sex={props.match.params.sex} date={props.match.params.date}/>
         </React.Fragment>
       case 1:
         return <React.Fragment>
@@ -208,7 +209,7 @@ const MedicPage = (props) => {
 
       <div className="body">
         <div className={classes.root}>
-      <MenuAdmin/>
+      <MenuAdmin doctorID={doctorID}/>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>

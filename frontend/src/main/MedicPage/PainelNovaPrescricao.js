@@ -26,8 +26,8 @@ export default class PainelNovaPrescricao extends React.Component {
     patientInfo : {
       name:this.props.name,
       patientNumber:this.props.id,
-      sex:"",
-      birth_date:"",
+      sex:this.props.sex,
+      birth_date:this.props.date,
       episode_number:0
     }
   }

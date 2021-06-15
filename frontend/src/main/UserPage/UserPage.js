@@ -84,16 +84,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserPage = () => {
+const UserPage = (props) => {
     const classes = useStyles();
+    const doctorID = props.match.params.docID;
+    //console.log(doctorID);
     return (
         <div className={classes.root}>
-            <MenuAdmin/>
+            <MenuAdmin doctorID={doctorID}/>
 
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
-                    <TableTest/>
+                    <TableTest doctorID={doctorID}/>
                 </Container>
             </main>
         </div>
